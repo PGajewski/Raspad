@@ -2,6 +2,7 @@
 
 LCD_OS::LCD_OS()
 {
+	std::cout << "Running keyboard thread" << std::endl;
 	//Run keyboard handler thread.
 	std::thread(std::ref(KeyboardThread::getKeyboardThread()));
 
@@ -63,7 +64,7 @@ int LCD_OS::start()
 				else
 					activeProgram->OnUpKeyReleased();
 				KeyboardThread::getKeyboardThread().isUpKeyEvent.store(false);
-			
+			}
 
 			if (KeyboardThread::getKeyboardThread().isDownKeyEvent.load())
 			{
