@@ -15,6 +15,7 @@ LCD_OS::LCD_OS()
 LCD_OS::~LCD_OS()
 {
 	keyboardThread.join();
+	activeThread.join();
 }
 
 void LCD_OS::setActiveProgram(std::shared_ptr<Program> newProgram, bool wakeOld)
@@ -30,14 +31,15 @@ int LCD_OS::start()
 
 	//2.show
 	std::cout << "**********Init LCD**********\r" << std::endl;
+
 	LCD_SCAN_DIR LCD_ScanDir = SCAN_DIR_DFT;//SCAN_DIR_DFT = D2U_L2R
 	LCD_Init(LCD_ScanDir);
 	LCD_Clear(WHITE);
 
 	for (;;)
 	{
-		//TODO: make correct program activacion
-		std::thread thr(&Program::operator(), activeProgram);
+		std::cout << "Start new program" << std::endl;
+		activeThread = std::thread(&Program::operator(), activeProgram);
 		for (;;)
 		{
 			this->waitForSignal();
@@ -45,15 +47,20 @@ int LCD_OS::start()
 			//Check inactive.
 			if (KeyboardThread::getKeyboardThread().isInactive.load())
 			{
+				isOSUsingScreen.store(true);
 				LCD_ShowBmp("pic/logo.bmp");
 				continue;
+			}
+			else
+			{
+				isOSUsingScreen.store(false);
 			}
 
 			//Check is program end.
 			if (!activeProgram->running.load())
 			{
 				//Wait for end of thread.
-				thr.join();
+				activeThread.join();
 				break;
 			}
 

@@ -97,9 +97,9 @@ void Program::operator()()
 	while (running.load())
 	{
 		//Default test thread.
-		LCD_OS::getLCDOperationSystem().LCD_Clear(GUI_BACKGROUND);
+		LCD_OS::getLCDOperationSystem().OS_LCD_Clear(GUI_BACKGROUND);
 		std::this_thread::sleep_for(std::chrono::milliseconds(500));
-		LCD_OS::getLCDOperationSystem().LCD_Clear(RED);
+		LCD_OS::getLCDOperationSystem().OS_LCD_Clear(RED);
 		std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	}
 }
