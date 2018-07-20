@@ -91,7 +91,7 @@ void Program::OnExit()
 	}
 }
 
-/*Thread function - pure virtual*/
+/*Thread function - virtual*/
 void Program::operator()()
 {
 	while (running.load())

@@ -4,7 +4,7 @@
 class MainScreen : public Program
 {
 public:
-	MainScreen() : Program("Main Screen", "/raspad/pic/main_screen_icone"){}
+	MainScreen() : Program("Main Screen", "pic/main_screen_icone"){}
 
 	void OnLeftKeyPressed();
 	void OnLeftKeyReleased();
@@ -32,6 +32,7 @@ public:
 
 	void OnExit();
 
-	/*Thread function - pure virtual*/
+	/*
 	void operator()();
+*/
 };

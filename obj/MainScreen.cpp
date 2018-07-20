@@ -77,8 +77,9 @@ void MainScreen::OnExit()
 
 }
 
-/*Thread function - pure virtual*/
+/*
 void MainScreen::operator()()
 {
 
 }
+*/

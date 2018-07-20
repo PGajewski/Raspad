@@ -3,15 +3,6 @@
 #include <atomic>
 #include <chrono>
 
-extern "C"
-{
-#include <bcm2835.h>
-#include "DEV_Config.h"
-#include "LCD_Driver.h"
-#include "LCD_GUI.h"
-#include "LCD_BMP.h"
-}
-
 class Program
 {
 protected:

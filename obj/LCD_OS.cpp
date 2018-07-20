@@ -4,16 +4,17 @@ LCD_OS::LCD_OS()
 {
 	std::cout << "Running keyboard thread" << std::endl;
 	//Run keyboard handler thread.
-	std::thread(std::ref(KeyboardThread::getKeyboardThread()));
+	keyboardThread = std::thread(std::ref(KeyboardThread::getKeyboardThread()));
 
 	//Init main and active program.
 	mainProgram = std::static_pointer_cast<Program>(std::make_shared<MainScreen>());
 	activeProgram = mainProgram;
+	std::cout << "Constructor finished!" << std::endl;
 }
 
 LCD_OS::~LCD_OS()
 {
-	
+	keyboardThread.join();
 }
 
 void LCD_OS::setActiveProgram(std::shared_ptr<Program> newProgram, bool wakeOld)
@@ -44,7 +45,7 @@ int LCD_OS::start()
 			//Check inactive.
 			if (KeyboardThread::getKeyboardThread().isInactive.load())
 			{
-				LCD_ShowBmp("/raspad/pic/logo.bmp");
+				LCD_ShowBmp("pic/logo.bmp");
 				continue;
 			}
 

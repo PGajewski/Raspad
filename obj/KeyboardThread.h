@@ -9,7 +9,7 @@ extern "C"
 }
 using namespace std::chrono_literals;
 
-class KeyboardThread : std::thread
+class KeyboardThread
 {
 private:
 	KeyboardThread();
@@ -22,7 +22,7 @@ public:
 	/*General change variable*/
 	bool wasChange = true;
 
-	bool isDebugKeyboard = true;
+	bool isDebugKeyboard = false;
 
 	KeyboardThread(KeyboardThread const&) = delete;
 	void operator=(KeyboardThread const&) = delete; // Don't implement

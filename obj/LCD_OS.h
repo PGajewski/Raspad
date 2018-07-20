@@ -27,6 +27,8 @@ private:
 	/*Condition variable*/
 	std::condition_variable cv;
 	std::mutex mx;
+	std::atomic_bool isOSUsingScreen{false};	
+	std::thread keyboardThread;
 
 	/*Programs active in OS*/
 	std::shared_ptr<Program> mainProgram;
@@ -54,7 +56,73 @@ public:
 	{
 		cv.notify_one();
 	}
+	
+	inline void GUI_DrawLine(POINT Xstart, POINT Ystart, POINT Xend, POINT Yend, COLOR Color, LINE_STYLE Line_Style, DOT_PIXEL Dot_Pixel)
+	{
+		if(!isOSUsingScreen.load())
+		{
+			GUI_DrawLine(Xstart, Ystart, Xend, Yend, Color, Line_style, Dot_Pixel);
+		}
+	}
 
+	inline void GUI_DrawRectangle(POINT Xstart, POINT Ystart, POINT Xend, POINT Yend, COLOR Color, DRAW_FILL Filled , DOT_PIXEL Dot_Pixel )
+	{
+		if(!isOSUsingScreen.load())
+		{
+			GUI_DrawRectangle(Xstart, Ystart, Xend, Yend, Color, Filled, Dot_Pixel);
+		}
+	}
+
+
+	inline void GUI_DrawCircle(POINT X_Center, POINT Y_Center, LENGTH Radius, COLOR Color, DRAW_FILL Draw_Fill , DOT_PIXEL Dot_Pixel )
+	{
+		if(!isOSUsingScreen.load())
+		{
+			GUI_DrawCirce(X_Center, Y_Center, Radius, Color, Draw_Fill, Dot_Pixel);
+		}
+	}
+
+	inline void GUI_Disbitmap(POINT Xpoint, POINT Ypoint, const unsigned char *pBmp, POINT Width, POINT Height)
+	{
+		if(!isOSUsingScreen.load())
+		{
+			GUI_Disbitman(Xpoint, Ypoint, Width, Height);
+		}
+	}
+
+	//Display string
+
+	inline void GUI_DisChar( POINT Xstart, POINT Ystart, const char Acsii_Char, sFONT* Font, COLOR Color_Background, COLOR Color_Foreground)
+	{
+		if(!isOSUsingScreen.load())
+		{
+			GUI_DisChar(Xstart, Ystart, Acsii_Char, Font, Color_Background, Color_Foreground);
+		}
+	}
+
+	inline void GUI_DisString_EN(POINT Xstart, POINT Ystart, const char * pString, sFONT* Font, COLOR Color_Background, COLOR Color_Foreground )
+	{
+		if(!isOSUsingScreen.load())
+		{
+			GUI_DisString(Xstart, Ystart, pString, Font, Color_Background, Color_Foreground);
+		}
+	}
+
+	inline void GUI_DisNum(POINT Xpoint, POINT Ypoint, int32_t Nummber, sFONT* Font, COLOR Color_Background, COLOR Color_Foreground )
+	{
+		if(!isOSUsingScreen.load())
+		{
+			GUI_DisNum(Xpoint, Ypoint, Number, Font, Color_Background, Color_Foreground);
+		}
+	}
+
+	inline uint8_t LCD_ShowBmp(const char *path)
+	{
+		if(!isOSUsingScreen.load())
+		{
+			LCD_ShowBmp(path);
+		}
+	}
 	inline void returnToMainProgram()
 	{
 		sleepingProgramsList.push_back(activeProgram);
@@ -65,3 +133,4 @@ public:
 
 	~LCD_OS();
 };
+
