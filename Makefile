@@ -11,9 +11,9 @@ OBJ_O = $(patsubst %.c,${DIR_BIN}/%.o,$(notdir ${OBJ_C}))
 TARGET = gajos_raspad_app
 #BIN_TARGET = ${DIR_BIN}/${TARGET}
 
-CC = gcc
+CC = gcc-8.1.0
 
-CXX = g++
+CXX = g++-8.1.0
 
 DEBUG = -g -O0 -Wall
 CFLAGS += $(DEBUG)
@@ -22,7 +22,7 @@ CXXFLAGS = -std=c++17
 CXX_FLAGS += $(DEBUG)
 
 LIB = -lbcm2835
-CXXLIB = -pthread
+CXXLIB = -pthread -lstdc++fs
 
 
 ${TARGET}:${OBJ_O} 

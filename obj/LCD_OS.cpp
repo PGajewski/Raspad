@@ -9,7 +9,7 @@ LCD_OS::LCD_OS()
 	keyboardThread = std::thread(std::ref(KeyboardThread::getKeyboardThread()));
 
 	//Init main and active program.
-	mainProgram = std::static_pointer_cast<Program>(std::make_shared<MainScreen>());
+	mainProgram = std::static_pointer_cast<Program>(std::make_shared<FileManager>());
 	activeProgram = mainProgram;
 	std::cout << "Constructor finished!" << std::endl;
 }
