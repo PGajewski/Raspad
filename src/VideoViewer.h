@@ -2,7 +2,7 @@
 #include "Program.h"
 #include "opencv2/opencv.hpp"
 
-#include <gd.h>
+#include <GdiPlusFlat.h>
 
 
 
