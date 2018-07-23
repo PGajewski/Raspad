@@ -1,6 +1,6 @@
 #pragma once
 #include "Program.h"
-#include "opencv3/opencv.hpp"
+#include "opencv2/opencv.hpp"
 
 
 class VideoViewer : public Program
