@@ -22,7 +22,7 @@ CXXFLAGS = -std=c++17
 CXX_FLAGS += $(DEBUG)
 
 LIB = -lbcm2835
-CXXLIB = -I/usr/include/opencv2 -I/usr/include/glib-2.0  -pthread -lstdc++fs -lopencv_core
+CXXLIB = -I/usr/include/opencv2 -I/usr/include/glib-2.0  -pthread -lstdc++fs -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_videoio
 
 
 ${TARGET}:${OBJ_O} 
