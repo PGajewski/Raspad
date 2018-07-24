@@ -3,7 +3,7 @@
 LCD_OS::LCD_OS()
 {
 	//Run keyboard handler thread.
-	std::thread(this->keyThread);
+	std::thread(*this->keyboardThread);
 }
 
 LCD_OS::~LCD_OS()

@@ -13,4 +13,8 @@ extern bool is_key1;
 extern bool is_key2;
 extern bool is_key3;
 
+void Show_Debug_Keyboard(void);
+void Listen_Key(void);
+
+
 #endif

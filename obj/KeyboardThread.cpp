@@ -116,7 +116,7 @@ void KeyboardThread::updateButtons()
 	}
 
 
-	if (isUpKey || isDownKey || isLeftey || isRightKey || isPressKey || isKey1 || isKey2 || isKey3)
+	if (isUpKey || isDownKey || isLeftKey || isRightKey || isPressKey || isKey1 || isKey2 || isKey3)
 	{
 		lastEventTime = std::chrono::steady_clock::now();
 	}

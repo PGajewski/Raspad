@@ -12,7 +12,7 @@ public:
 	inline std::string getIcone() { return this->icone_path; }
 
 	/*Functions to handle signals from operational system*/
-	virtual void OnLeftKeyPresseed() = 0;
+	virtual void OnLeftKeyPressed() = 0;
 	virtual void OnLeftKeyReleased() = 0;
 
 	virtual void OnRightKeyPressed() = 0;
