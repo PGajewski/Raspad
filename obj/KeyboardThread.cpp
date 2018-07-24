@@ -10,6 +10,12 @@ void KeyboardThread::operator()()
 	}
 }
 
+KeyboardThread::KeyboardThread()
+{
+
+}
+
+
 KeyboardThread::~KeyboardThread()
 {
 
