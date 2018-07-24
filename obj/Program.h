@@ -1,7 +1,7 @@
 #pragma once
 #include <thread>
 
-class Program : public std::thread
+class Program
 {
 protected:
 	std::string name;
