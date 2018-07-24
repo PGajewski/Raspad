@@ -17,94 +17,94 @@ void KeyboardThread::updateButtons()
 	Listen_Key();
 
 	if (is_up_key) {
-		if (!isUpKey)
-			isUpKeyEvent = true;
-		isUpKey = true;
+		if (!isUpKey.load())
+			isUpKeyEvent.store(true);
+		isUpKey.store(true);
 	}
 	else {
-		if (isUpKey)
-			isUpKeyEvent = true;
-		isUpKey = false;
+		if (isUpKey.load())
+			isUpKeyEvent.store(true);
+		isUpKey.store(false);
 	}
 
 	if (is_down_key) {
-		if (!isDownKey)
-			isDownKeyEvent = true;
-		isDownKey = true;
+		if (!isDownKey.load())
+			isDownKeyEvent.store(true);
+		isDownKey.store(true);
 	}
 	else {
-		if (isDownKey)
-			isDownKeyEvent = true;
-		isDownKey = false;
+		if (isDownKey.load())
+			isDownKeyEvent.store(true);
+		isDownKey.store(false);
 	}
 
 	if (is_left_key) {
-		if (!isLeftKey)
-			isLeftKeyEvent = true;
-		isLeftKey = true;
+		if (!isLeftKey.load())
+			isLeftKeyEvent.store(true);
+		isLeftKey.store(true);
 	}
 	else {
-		if (isLeftKey)
-			isLeftKeyEvent = true;
-		isLeftKey = false;
+		if (isLeftKey.load())
+			isLeftKeyEvent.store(true);
+		isLeftKey.store(false);
 	}
 
 	if (is_right_key) {
-		if (!isRightKey)
-			isRightKeyEvent = true;
-		isRightKey = true;
+		if (!isRightKey.load())
+			isRightKeyEvent.store(true);
+		isRightKey.store(true);
 	}
 	else {
-		if (isRightKey)
-			isRightKeyEvent = true;
-		isRightKey = false;
+		if (isRightKey.load())
+			isRightKeyEvent.store(true);
+		isRightKey.store(false);
 	}
 
 	if (is_press_key) {
-		if (!isPressKey)
-			isPressKeyEvent = true;
-		isPressKey = true;
+		if (!isPressKey.load())
+			isPressKeyEvent.store(true);
+		isPressKey.store(true);
 	}
 	else {
-		if (isPressKey)
-			isPressKeyEvent = true;
-		isPressKey = false;
+		if (isPressKey.load())
+			isPressKeyEvent.store(true);
+		isPressKey.store(false);
 	}
 
 	if (is_key1) {
-		if (!isKey1)
-			isKey1Event = true;
-		isKey1 = true;
+		if (!isKey1.load())
+			isKey1Event.store(true);
+		isKey1.store(true);
 	}
 	else {
-		if (isKey1)
-			isKey1Event = true;
-		isKey1 = false;
+		if (isKey1.load())
+			isKey1Event.store(true);
+		isKey1.store(false);
 	}
 
 	if (is_key2) {
-		if (!isKey2)
-			isKey2Event = true;
-		isKey2 = true;
+		if (!isKey2.load())
+			isKey2Event.store(true);
+		isKey2.store(true);
 	}
 	else {
-		if (isKey2)
-			isKey2Event = true;
-		isKey2 = false;
+		if (isKey2.load())
+			isKey2Event.store(true);
+		isKey2.store(false);
 	}
 
 	if (is_key3) {
-		if (!isKey3)
-			isKey3Event = true;
-		isKey3 = true;
+		if (!isKey3.load())
+			isKey3Event.store(true);
+		isKey3.store(true);
 	}
 	else {
-		if (isKey3)
-			isKey3Event = true;
-		isKey3 = false;
+		if (isKey3.load())
+			isKey3Event.store(true);
+		isKey3.store(false);
 	}
 
-	if (isUpKeyEvent || isDownKeyEvent || isLeftKeyEvent || isRightKeyEvent || isPressKeyEvent || isKey1Event || isKey2Event || isKey3Event)
+	if (isUpKeyEvent.load() || isDownKeyEvent.load() || isLeftKeyEvent.load() || isRightKeyEvent.load() || isPressKeyEvent.load() || isKey1Event.load() || isKey2Event.load() || isKey3Event.load())
 	{
 		LCD_OS.getLCDOperationSystem().sendSignal();
 		if (is_debug_keyboard)
@@ -116,7 +116,7 @@ void KeyboardThread::updateButtons()
 	}
 
 
-	if (isUpKey || isDownKey || isLeftKey || isRightKey || isPressKey || isKey1 || isKey2 || isKey3)
+	if (isUpKey.load() || isDownKey.load() || isLeftKey.load() || isRightKey.load() || isPressKey.load() || isKey1.load() || isKey2.load() || isKey3.load())
 	{
 		lastEventTime = std::chrono::steady_clock::now();
 	}
