@@ -1,15 +1,15 @@
 #pragma once
 #include <thread>
 
-abstract class Program : public std::thread
+class Program : public std::thread
 {
 private:
 	std::string name;
 	std::string icone_path;
 public:
-	Program(std::string name_s, std::path) : name(name_s), icone_path(path);
-	inline std::string getName() { return this.name; }
-	inline std::string getIcone() { return this.icone_path; }
+	Program(std::string name_s, std::string path) : name(name_s), icone_path(path);
+	inline std::string getName() { return this->name; }
+	inline std::string getIcone() { return this->icone_path; }
 
 	/*Functions to handle signals from operational system*/
 	virtual void OnLeftKeyPresseed() = 0;

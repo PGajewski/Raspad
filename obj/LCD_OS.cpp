@@ -6,6 +6,11 @@ LCD_OS::LCD:OS()
 	std::thread(this->keyThread);
 }
 
+LCD_OS::~LCD:OS()
+{
+	
+}
+
 int LCD_OS::start()
 {
 	//1.System Initialization

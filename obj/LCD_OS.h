@@ -2,7 +2,7 @@
 #include "Program.h"
 #include <vector>
 #include <memory>
-#include <KeyboardThread.h>
+#include "KeyboardThread.h"
 #include <mutex>
 #include <condition_variable>
 #include <iostream>
@@ -55,7 +55,6 @@ public:
 	void setActiveProgram(std::shared_ptr<Program> newProgram, bool wakeOld)
 	{
 		//Looking for old program instance in sleeping vector.
-		if wakeOld()
 		this->sleepingProgramsList.push_back(activeProgram)
 	}
 

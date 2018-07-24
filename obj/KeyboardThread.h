@@ -5,7 +5,7 @@
 
 extern "C"
 {
-	include "LCD_Key.h"
+#include "LCD_Key.h"
 }
 
 class KeyboardThread : std::thread
