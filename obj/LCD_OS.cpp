@@ -4,6 +4,10 @@ LCD_OS::LCD_OS()
 {
 	//Run keyboard handler thread.
 	std::thread(KeyboardThread::getKeyboardThread());
+
+	//Init main and active program.
+	mainProgram = std::static_pointer_cast<Program>(std::make_shared<MainScreen>());
+	activeProgram = mainProgram;
 }
 
 LCD_OS::~LCD_OS()

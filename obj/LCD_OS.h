@@ -29,8 +29,8 @@ private:
 	std::mutex mx;
 
 	/*Programs active in OS*/
-	std::shared_ptr<Program> mainProgram = std::static_pointer_cast<Program>(std::make_shared<MainScreen>());
-	std::shared_ptr<Program> activeProgram = mainProgram;
+	std::shared_ptr<Program> mainProgram;
+	std::shared_ptr<Program> activeProgram;
 	std::vector<std::shared_ptr<Program>> sleepingProgramsList;
 
 public:
