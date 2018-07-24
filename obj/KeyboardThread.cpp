@@ -111,8 +111,8 @@ void KeyboardThread::updateButtons()
 
 	if (isUpKeyEvent.load() || isDownKeyEvent.load() || isLeftKeyEvent.load() || isRightKeyEvent.load() || isPressKeyEvent.load() || isKey1Event.load() || isKey2Event.load() || isKey3Event.load())
 	{
-		LCD_OS.getLCDOperationSystem().sendSignal();
-		if (is_debug_keyboard)
+		LCD_OS::getLCDOperationSystem().sendSignal();
+		if (isDebugKeyboard)
 		{
 			//Update LCD screen for new content.
 			Show_Debug_Keyboard();
@@ -128,7 +128,7 @@ void KeyboardThread::updateButtons()
 	else {
 		auto actualTime = std::chrono::steady_clock::now();
 		std::chrono::duration<double> diff = actualTime - lastEventTime;
-		if ((diff.count)  > sleepTime)
+		if ((diff.count())  > sleepTime)
 		{
 			LCD_ShowBmp("/raspad/pic/logo.bmp");
 		}

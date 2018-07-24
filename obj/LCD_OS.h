@@ -21,7 +21,6 @@ class LCD_OS
 {
 private:
 	LCD_OS();
-	LCD_OS(const LCD_OS &) = default;
 
 	/*Condition variable*/
 	std::condition_variable cv;
@@ -40,6 +39,9 @@ public:
 	}
 	int start();
 	
+	LCD_OS(LCD_OS const&) = delete;
+	void operator=(LCD_OS const&) = delete; // Don't implement
+
 	inline void waitForSignal()
 	{
 		std::unique_lock<std::mutex> lk(mx);

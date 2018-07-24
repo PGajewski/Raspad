@@ -13,7 +13,6 @@ class KeyboardThread : std::thread
 {
 private:
 	KeyboardThread();
-	KeyboardThread(const KeyboardThread &) = default;
 
 	/*Last event time*/
 	std::chrono::time_point<std::chrono::steady_clock> lastEventTime;
@@ -24,6 +23,9 @@ public:
 	bool wasChange = true;
 
 	bool isDebugKeyboard = true;
+
+	KeyboardThread(KeyboardThread const&) = delete;
+	void operator=(KeyboardThread const&) = delete; // Don't implement
 
 	/*Bool variable for each button.*/
 	std::atomic_bool isUpKey{ false };
