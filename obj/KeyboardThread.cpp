@@ -129,7 +129,7 @@ void KeyboardThread::updateButtons()
 	else {
 		auto actualTime = std::chrono::steady_clock::now();
 		std::chrono::duration<double> diff = actualTime - lastEventTime;
-		if ((diff.count())  > sleepTime)
+		if (diff.count() > sleepTime)
 		{
 			isInactive.store(true);
 		}
