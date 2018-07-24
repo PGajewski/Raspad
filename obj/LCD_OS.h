@@ -6,6 +6,7 @@
 #include <mutex>
 #include <condition_variable>
 #include <iostream>
+#include "MainScreen.h"
 
 extern "C"
 {
@@ -28,8 +29,8 @@ private:
 	std::mutex mx;
 
 	/*Programs active in OS*/
-	std::shared_ptr<Program> mainProgram;
-	std::shared_ptr<Program> activeProgram;
+	std::shared_ptr<Program> mainProgram = std::make_shared<MainProgram>();
+	std::shared_ptr<Program> activeProgram = std::make_shared<MainProgram>();
 	std::vector<std::shared_ptr<Program>> sleepingProgramsList;
 
 public:
