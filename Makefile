@@ -17,7 +17,7 @@ CXX = g++-8.1.0
 
 CFLAGS += -Wall
 
-DEBUG = -g -DDEBUG -O0
+DEBUG = -g -DDEBUG
 
 CXXFLAGS = -std=c++17 -Wall
 
@@ -26,6 +26,10 @@ OP_FLAG = -O3
 LIB = -lbcm2835
 CXXLIB = -I/usr/include/opencv2 -I/usr/include/glib-2.0  -pthread -lstdc++fs -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_videoio
 
+#debug flags modyfication
+debug : CXXFLAGS += $(DEBUG)
+debug : CFLAGS += $(DEBUG)
+debug : OP_FLAG := -O0
 
 ${TARGET}:${OBJ_O}
 	$(CXX) $(CXXFLAGS) $(OBJ_CXX)  -o $@ $(OBJ_O) $(LIB) $(CXXLIB)
@@ -42,10 +46,6 @@ clean :
 
 optimal : ${OBJ_O}
 	$(CXX) $(CXXFLAGS) $(OP_FLAG) $(OBJ_CXX) -o $(TARGET) $(OBJ_O) $(LIB) $(CXXLIB)
-
-debug : CXXFLAGS += $(DEBUG)
-debug :	CFLAGS += $(DEBUG)
-debug : OPT_FLAG = -O0
 
 debug : ${OBJ_O}
 	$(CXX) $(CXXFLAGS) $(OP_FLAG) $(OBJ_CXX) -o $(TARGET) $(OBJ_O) $(LIB) $(CXXLIB)

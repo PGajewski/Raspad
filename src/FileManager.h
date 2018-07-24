@@ -22,8 +22,8 @@ private:
 	std::vector<std::string> pathVector;
 	std::vector<std::string> directoryContent;
 	std::string getActualPath();
-	void updateDirectoryContent(const int actualPosition);
-	void printDirectoryContent(const int actualPosition);
+	void updateDirectoryContent(const unsigned int actualPosition);
+	void printDirectoryContent(const unsigned int actualPosition);
 	void updateActualChosenOption();
 	void showFileInfo();
 	void setPathVector(std::string start_path);
@@ -41,12 +41,12 @@ private:
 	std::atomic<FileManagerContent> content = VIEW;
 
 	/*Class parameters*/
-	const int DISPLAY_MAX_CHARS = 16;
-	const int DISPLAY_START_POS_X = 5;
-	const int DISPLAY_START_POS_Y = 10;
-	const int DISPLAY_INC_Y = 4;
-	const int FONT_SIZE = 8;
-	const int LINE_ON_PAGE = 7;
+	const unsigned int DISPLAY_MAX_CHARS = 16;
+	const unsigned int DISPLAY_START_POS_X = 5;
+	const unsigned int DISPLAY_START_POS_Y = 10;
+	const int unsigned DISPLAY_INC_Y = 4;
+	const int unsigned FONT_SIZE = 8;
+	const int unsigned LINE_ON_PAGE = 7;
 	sFONT* FONT = &Font12;
 	const COLOR BACKGROUND = BLACK;
 	const COLOR FILE_FONT_COLOR = WHITE;

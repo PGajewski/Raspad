@@ -30,7 +30,7 @@ void FileManager::setPathVector(std::string start_path)
 	if (itr != pathVector.end()) pathVector.erase(itr);
 }
 
-void FileManager::updateDirectoryContent(const int actualPosition)
+void FileManager::updateDirectoryContent(const unsigned int actualPosition)
 {
 	//Clear old content.
 	directoryContent.clear();
@@ -97,16 +97,16 @@ std::string FileManager::getFileDescription(const std::string& path) const
 	return exec(command.str().c_str());
 }
 
-void FileManager::printDirectoryContent(const int actualPosition)
+void FileManager::printDirectoryContent(const unsigned int actualPosition)
 {
 	int actualPosY = DISPLAY_START_POS_Y;
-	
+
 	if(!directoryContent.size())
 		return;
 
 	//Count range of positions to display.
-	int min = actualPosition - actualPosition%LINE_ON_PAGE;
-	int max;
+	unsigned int min = actualPosition - actualPosition%LINE_ON_PAGE;
+	unsigned int max;
 	if (min + LINE_ON_PAGE < directoryContent.size())
 	{
 		max = min + LINE_ON_PAGE;
@@ -116,9 +116,8 @@ void FileManager::printDirectoryContent(const int actualPosition)
 		max = directoryContent.size();
 	}
 
-	for (int i = min; i < max; ++i)
+	for (unsigned int i = min; i < max; ++i)
 	{
-		int posOffset = 0;
 		COLOR actual_background_color = BACKGROUND;
 		COLOR actual_font_color;
 		if (i == actualPosition)
@@ -136,7 +135,7 @@ void FileManager::printDirectoryContent(const int actualPosition)
 			{
 				actualFirstCharIndex.store(-1);
 			}
-		
+
 		}
 
 		std::string temp_file_path = getActualPath() + directoryContent[i];
