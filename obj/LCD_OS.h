@@ -2,11 +2,11 @@
 #include "Program.h"
 #include <vector>
 #include <memory>
-#include "KeyboardThread.h"
 #include <mutex>
 #include <condition_variable>
 #include <iostream>
 #include "MainScreen.h"
+#include "KeyboardThread.h"
 
 extern "C"
 {
