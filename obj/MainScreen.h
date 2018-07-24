@@ -3,6 +3,7 @@
 
 class MainScreen : Program
 {
+public:
 	MainScreen() : Program("Main Screen", "/raspad/pic/main_screen_icone"){}
 
 	void OnLeftKeyPressed();

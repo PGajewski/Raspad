@@ -3,7 +3,7 @@
 
 class Program : public std::thread
 {
-private:
+protected:
 	std::string name;
 	std::string icone_path;
 public:
