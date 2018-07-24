@@ -46,6 +46,8 @@ public:
 	std::atomic_bool isKey2Event{true};
 	std::atomic_bool isKey3Event{true};
 
+	std::atomic_bool isInactive{ false };
+
 	static KeyboardThread & getKeyboardThread()
 	{
 		static KeyboardThread singleton;

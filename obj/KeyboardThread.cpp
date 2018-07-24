@@ -130,7 +130,7 @@ void KeyboardThread::updateButtons()
 		std::chrono::duration<double> diff = actualTime - lastEventTime;
 		if ((diff.count())  > sleepTime)
 		{
-			LCD_ShowBmp("/raspad/pic/logo.bmp");
+			isInactive.store(true)
 		}
 	}
 }

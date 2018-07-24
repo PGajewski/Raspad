@@ -3,7 +3,7 @@
 LCD_OS::LCD_OS()
 {
 	//Run keyboard handler thread.
-	std::thread(*this->keyboardThread);
+	std::thread(KeyboardThread::getKeyboardThread());
 }
 
 LCD_OS::~LCD_OS()
@@ -34,6 +34,12 @@ int LCD_OS::start()
 		for (;;)
 		{
 			this->waitForSignal();
+
+			//Check inactive.
+			if (KeyboardThread::getKeyboardThread().isInactive.load())
+			{
+				LCD_ShowBmp("/raspad/pic/logo.bmp");
+			}
 
 			//Modify content of programs.
 			if (KeyboardThread::getKeyboardThread().isUpKeyEvent.load())
