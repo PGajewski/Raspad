@@ -39,5 +39,5 @@ public:
 	virtual void OnExit() = 0;
 
 	/*Thread function - pure virtual*/
-	virtual void operator()();
+	virtual void operator()() {};
 };
