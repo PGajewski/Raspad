@@ -11,6 +11,11 @@ void KeyboardThread::operator()()
 	}
 }
 
+KeyboardThread::~KeyboardThread()
+{
+
+}
+
 void KeyboardThread::updateButtons()
 {
 	//Update key states.

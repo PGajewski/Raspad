@@ -26,23 +26,23 @@ public:
 	bool isDebugKeyboard = true;
 
 	/*Bool variable for each button.*/
-	std::atomic_bool isUpKey(false);
-	std::atomic_bool isDownKey(false);
-	std::atomic_bool isLeftKey(false);
-	std::atomic_bool isRightKey(false);
-	std::atomic_bool isPressKey(false);
-	std::atomic_bool isKey1(false);
-	std::atomic_bool isKey2(false);
-	std::atomic_bool isKey3(false);
+	std::atomic_bool isUpKey{ false };
+	std::atomic_bool isDownKey{false};
+	std::atomic_bool isLeftKey{false};
+	std::atomic_bool isRightKey{false};
+	std::atomic_bool isPressKey{false};
+	std::atomic_bool isKey1{false};
+	std::atomic_bool isKey2{false};
+	std::atomic_bool isKey3{false};
 
-	std::atomic_bool isUpKeyEvent(true);
-	std::atomic_bool isDownKeyEvent(true);
-	std::atomic_bool isLeftKeyEvent(true);
-	std::atomic_bool isRightKeyEvent(true);
-	std::atomic_bool isPressKeyEvent(true);
-	std::atomic_bool isKey1Event(true);
-	std::atomic_bool isKey2Event(true);
-	std::atomic_bool isKey3Event(true);
+	std::atomic_bool isUpKeyEvent{true};
+	std::atomic_bool isDownKeyEvent{true};
+	std::atomic_bool isLeftKeyEvent{true};
+	std::atomic_bool isRightKeyEvent{true};
+	std::atomic_bool isPressKeyEvent{true};
+	std::atomic_bool isKey1Event{true};
+	std::atomic_bool isKey2Event{true};
+	std::atomic_bool isKey3Event{true};
 
 	static KeyboardThread & getKeyboardThread()
 	{
