@@ -7,6 +7,7 @@ extern "C"
 {
 #include "LCD_Key.h"
 }
+using namespace std::chrono_literals;
 
 class KeyboardThread : std::thread
 {

@@ -15,6 +15,8 @@ extern "C"
 #include "LCD_GUI.h"
 }
 
+using namespace std::chrono_literals;
+
 class LCD_OS
 {
 private:
@@ -22,7 +24,7 @@ private:
 	LCD_OS(const LCD_OS &) = default;
 	LCD_OS(LCD_OS &&) = default;
 	/*Keyboard events thread*/
-	std::thread keyboardThread = KeyboardThread::getKeyboardThread();
+	KeyboardThread keyboardThread = KeyboardThread::getKeyboardThread();
 
 	/*Condition variable*/
 	std::condition_variable cv;
