@@ -1,7 +1,7 @@
 #pragma once
 #include "Program.h"
 
-class MainScreen : Program
+class MainScreen : public Program
 {
 public:
 	MainScreen() : Program("Main Screen", "/raspad/pic/main_screen_icone"){}

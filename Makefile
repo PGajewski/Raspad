@@ -21,8 +21,8 @@ CFLAGS += $(DEBUG)
 CXXFLAGS = -std=c++17
 CXX_FLAGS += $(DEBUG)
 
-LIB = -lbcm2835 -lpthread
-CXXLIB = 
+LIB = -lbcm2835
+CXXLIB = -pthread
 
 
 ${TARGET}:${OBJ_O} 
