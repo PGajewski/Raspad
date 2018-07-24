@@ -34,7 +34,7 @@ int LCD_OS::start()
 
 	for (;;)
 	{
-		std::thread thr(*activeProgram.get());
+		std::thread thr(*std::dynamic_pointer_cast<MainScreen>(activeProgram));
 		for (;;)
 		{
 			this->waitForSignal();
