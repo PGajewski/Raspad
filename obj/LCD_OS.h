@@ -13,6 +13,7 @@ extern "C"
 #include "DEV_Config.h"
 #include "LCD_Driver.h"
 #include "LCD_GUI.h"
+#include "LCD_BMP.h"
 }
 
 using namespace std::chrono_literals;

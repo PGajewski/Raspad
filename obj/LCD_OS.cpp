@@ -30,7 +30,7 @@ int LCD_OS::start()
 
 	for (;;)
 	{
-		std::thread thr(activeProgram);
+		std::thread thr(*activeProgram);
 		for (;;)
 		{
 			this->waitForSignal();
@@ -39,6 +39,7 @@ int LCD_OS::start()
 			if (KeyboardThread::getKeyboardThread().isInactive.load())
 			{
 				LCD_ShowBmp("/raspad/pic/logo.bmp");
+				continue;
 			}
 
 			//Modify content of programs.

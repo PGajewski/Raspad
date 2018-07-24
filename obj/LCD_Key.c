@@ -2,8 +2,6 @@
 #include "LCD_GUI.h"
 #include "LCD_BMP.h"
 #include "DEV_Config.h"
-#include "time.h"
-#include <pthread.h>
 
 bool is_left_key = false;
 bool is_right_key = false;

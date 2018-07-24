@@ -124,13 +124,14 @@ void KeyboardThread::updateButtons()
 	if (isUpKey.load() || isDownKey.load() || isLeftKey.load() || isRightKey.load() || isPressKey.load() || isKey1.load() || isKey2.load() || isKey3.load())
 	{
 		lastEventTime = std::chrono::steady_clock::now();
+		isInactive.store(false);
 	}
 	else {
 		auto actualTime = std::chrono::steady_clock::now();
 		std::chrono::duration<double> diff = actualTime - lastEventTime;
 		if ((diff.count())  > sleepTime)
 		{
-			isInactive.store(true)
+			isInactive.store(true);
 		}
 	}
 }
