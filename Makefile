@@ -21,6 +21,8 @@ CFLAGS += $(DEBUG)
 CXXFLAGS = -std=c++17
 CXX_FLAGS += $(DEBUG)
 
+OP_FLAG = -O3
+
 LIB = -lbcm2835
 CXXLIB = -I/usr/include/opencv2 -I/usr/include/glib-2.0  -pthread -lstdc++fs -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_videoio
 
@@ -38,3 +40,6 @@ ${DIR_BIN}/%.o:$(DIR_FONTS)/%.c
 clean :
 	rm $(DIR_BIN)/*.* 
 	rm $(TARGET) 
+
+optimal :
+	$(CXX) $(CXXFLAGS) $(OP_FLAG) $(OBJ_CXX)  -o $(OBJ_O) $(LIB) $(CXXLIB)
