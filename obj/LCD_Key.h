@@ -13,10 +13,4 @@ extern bool is_key1;
 extern bool is_key2;
 extern bool is_key3;
 
-extern bool is_debug_keyboard;
-
-bool Start_Keyboard_Thread(void);
-
-void Keyboard_Thread_Join(void);
-
 #endif
