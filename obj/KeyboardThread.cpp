@@ -1,5 +1,4 @@
 #include "KeyboardThread.h"
-#include "LCD_OS.h"
 
 void KeyboardThread::operator()()
 {

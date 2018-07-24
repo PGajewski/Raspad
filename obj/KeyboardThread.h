@@ -3,6 +3,8 @@
 #include <chrono>
 #include <atomic>
 
+class LCD_OS;
+
 extern "C"
 {
 #include "LCD_Key.h"
