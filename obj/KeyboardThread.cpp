@@ -6,7 +6,7 @@ void KeyboardThread::operator()()
 	for (;;)
 	{
 		updateButtons();
-		LCD_OS.getLCDOperationSystem().waitForSignal();
+		LCD_OS::getLCDOperationSystem().waitForSignal();
 		sleep_for(100ms);
 	}
 }
@@ -118,11 +118,11 @@ void KeyboardThread::updateButtons()
 
 	if (isUpKey || isDownKey || isLeftey || isRightKey || isPressKey || isKey1 || isKey2 || isKey3)
 	{
-		lastEventTime = auto start = std::chrono::steady_clock::now();
+		lastEventTime = std::chrono::steady_clock::now();
 	}
 	else {
 		auto actualTime = auto end = std::chrono::steady_clock::now();
-		std::chrono::duration<double> diff = end - start;
+		std::chrono::duration<double> diff = actualTime - lastEventTime;
 		if ((diff.count)  > sleepTime)
 		{
 			LCD_ShowBmp("/raspad/pic/logo.bmp");

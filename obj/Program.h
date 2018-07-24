@@ -7,7 +7,7 @@ private:
 	std::string name;
 	std::string icone_path;
 public:
-	Program(std::string name_s, std::string path) : name(name_s), icone_path(path);
+	Program(std::string name_s, std::string path) : name(name_s), icone_path(path) {}
 	inline std::string getName() { return this->name; }
 	inline std::string getIcone() { return this->icone_path; }
 
@@ -16,7 +16,7 @@ public:
 	virtual void OnLeftKeyReleased() = 0;
 
 	virtual void OnRightKeyPressed() = 0;
-	virtual void OnLeftKeyReleased() = 0;
+	virtual void OnRightKeyReleased() = 0;
 
 	virtual void OnUpKeyPressed() = 0;
 	virtual void OnUpKeyReleased() = 0;
@@ -39,5 +39,5 @@ public:
 	virtual void OnExit() = 0;
 
 	/*Thread function - pure virtual*/
-	void operator()() = 0;
+	virtual void operator()() = 0;
 };

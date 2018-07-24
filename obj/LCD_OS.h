@@ -22,7 +22,7 @@ private:
 	LCD_OS(const LCD_OS &) = default;
 	LCD_OS(LCD_OS &&) = default;
 	/*Keyboard events thread*/
-	std::thread keyboardThread = KeyboardThread.getKeyboardThread();
+	std::thread keyboardThread = KeyboardThread::getKeyboardThread();
 
 	/*Condition variable*/
 	std::condition_variable cv;
@@ -52,11 +52,7 @@ public:
 		cv.notify_one();
 	}
 
-	void setActiveProgram(std::shared_ptr<Program> newProgram, bool wakeOld)
-	{
-		//Looking for old program instance in sleeping vector.
-		this->sleepingProgramsList.push_back(activeProgram)
-	}
+	void setActiveProgram(std::shared_ptr<Program> newProgram, bool wakeOld);
 
 	~LCD_OS();
 };

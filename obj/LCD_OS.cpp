@@ -11,6 +11,11 @@ LCD_OS::~LCD:OS()
 	
 }
 
+void LCD_OS::setActiveProgram(std::shared_ptr<Program> newProgram, bool wakeOld)
+{
+
+}
+
 int LCD_OS::start()
 {
 	//1.System Initialization
