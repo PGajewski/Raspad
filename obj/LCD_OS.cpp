@@ -36,75 +36,75 @@ int LCD_OS::start()
 			this->waitForSignal();
 
 			//Modify content of programs.
-			if (this->keyboardThread.isUpKeyEvent)
+			if (this->keyboardThread->isUpKeyEvent)
 			{
-				if (this->keyboardThread.isUpKey)
+				if (this->keyboardThread->isUpKey)
 					activeProgram->OnUpKeyPressed();
 				else
 					activeProgram->OnUpKeyReleased();
-				this->keyboardThread.isUpKeyEvent = false;
+				this->keyboardThread->isUpKeyEvent = false;
 			}
 
-			if (this->keyboardThread.isDownKeyEvent)
+			if (this->keyboardThread->isDownKeyEvent)
 			{
-				if (this->keyboardThread.isDownKey)
+				if (this->keyboardThread->isDownKey)
 					activeProgram->OnDownKeyPressed();
 				else
 					activeProgram->OnDownKeyReleased();
-				this->keyboardThread.isDownKeyEvent = false;
+				this->keyboardThread->isDownKeyEvent = false;
 			}
 
-			if (this->keyboardThread.isLeftKeyEvent)
+			if (this->keyboardThread->isLeftKeyEvent)
 			{
-				if (this->keyboardThread.isLeftKey)
+				if (this->keyboardThread->isLeftKey)
 					activeProgram->OnLeftKeyPressed();
 				else
 					activeProgram->OnLeftKeyReleased();
 			}
 
-			if (this->keyboardThread.isRightKeyEvent)
+			if (this->keyboardThread->isRightKeyEvent)
 			{
-				if (this->keyboardThread.isRightKey)
+				if (this->keyboardThread->isRightKey)
 					activeProgram->OnRightKeyPressed();
 				else
 					activeProgram->OnRightKeyReleased();
 			}
 
-			if (this->keyboardThread.isRightKeyEvent)
+			if (this->keyboardThread->isRightKeyEvent)
 			{
-				if (this->keyboardThread.isRightKey)
+				if (this->keyboardThread->isRightKey)
 					activeProgram->OnRightKeyPressed();
 				else
 					activeProgram->OnRightKeyReleased();
 			}
 
-			if (this->keyboardThread.isPressKeyEvent)
+			if (this->keyboardThread->isPressKeyEvent)
 			{
-				if (this->keyboardThread.isPressKey)
+				if (this->keyboardThread->isPressKey)
 					activeProgram->OnPressKeyPressed();
 				else
 					activeProgram->OnPressKeyReleased();
 			}
 
-			if (this->keyboardThread.isKey1Event)
+			if (this->keyboardThread->isKey1Event)
 			{
-				if (this->keyboardThread.isKey1)
+				if (this->keyboardThread->isKey1)
 					activeProgram->OnKey1Pressed();
 				else
 					activeProgram->OnKey1Released();
 			}
 
-			if (this->keyboardThread.isKey2Event)
+			if (this->keyboardThread->isKey2Event)
 			{
-				if (this->keyboardThread.isKey2)
+				if (this->keyboardThread->isKey2)
 					activeProgram->OnKey2Pressed();
 				else
 					activeProgram->OnKey2Released();
 			}
 
-			if (this->keyboardThread.isKey3Event)
+			if (this->keyboardThread->isKey3Event)
 			{
-				if (this->keyboardThread.isKey3)
+				if (this->keyboardThread->isKey3)
 					activeProgram->OnKey3Pressed();
 				else
 					activeProgram->OnKey3Released();

@@ -7,7 +7,7 @@ void KeyboardThread::operator()()
 	{
 		updateButtons();
 		LCD_OS::getLCDOperationSystem().waitForSignal();
-		sleep_for(100ms);
+		std::this_thread::sleep_for(100ms);
 	}
 }
 
@@ -121,7 +121,7 @@ void KeyboardThread::updateButtons()
 		lastEventTime = std::chrono::steady_clock::now();
 	}
 	else {
-		auto actualTime = auto end = std::chrono::steady_clock::now();
+		auto actualTime = std::chrono::steady_clock::now();
 		std::chrono::duration<double> diff = actualTime - lastEventTime;
 		if ((diff.count)  > sleepTime)
 		{
