@@ -1,12 +1,12 @@
 #include "LCD_OS.h"
 
-LCD_OS::LCD:OS()
+LCD_OS::LCD_OS()
 {
 	//Run keyboard handler thread.
 	std::thread(this->keyThread);
 }
 
-LCD_OS::~LCD:OS()
+LCD_OS::~LCD_OS()
 {
 	
 }
@@ -39,7 +39,7 @@ int LCD_OS::start()
 			if (this->keyboardThread.isUpKeyEvent)
 			{
 				if (this->keyboardThread.isUpKey)
-					activeProgram->OnUpKeyPresseed();
+					activeProgram->OnUpKeyPressed();
 				else
 					activeProgram->OnUpKeyReleased();
 				this->keyboardThread.isUpKeyEvent = false;
@@ -48,7 +48,7 @@ int LCD_OS::start()
 			if (this->keyboardThread.isDownKeyEvent)
 			{
 				if (this->keyboardThread.isDownKey)
-					activeProgram->OnDownKeyPresseed();
+					activeProgram->OnDownKeyPressed();
 				else
 					activeProgram->OnDownKeyReleased();
 				this->keyboardThread.isDownKeyEvent = false;
@@ -57,7 +57,7 @@ int LCD_OS::start()
 			if (this->keyboardThread.isLeftKeyEvent)
 			{
 				if (this->keyboardThread.isLeftKey)
-					activeProgram->OnLeftKeyPresseed();
+					activeProgram->OnLeftKeyPressed();
 				else
 					activeProgram->OnLeftKeyReleased();
 			}
@@ -65,7 +65,7 @@ int LCD_OS::start()
 			if (this->keyboardThread.isRightKeyEvent)
 			{
 				if (this->keyboardThread.isRightKey)
-					activeProgram->OnRightKeyPresseed();
+					activeProgram->OnRightKeyPressed();
 				else
 					activeProgram->OnRightKeyReleased();
 			}
@@ -73,7 +73,7 @@ int LCD_OS::start()
 			if (this->keyboardThread.isRightKeyEvent)
 			{
 				if (this->keyboardThread.isRightKey)
-					activeProgram->OnRightKeyPresseed();
+					activeProgram->OnRightKeyPressed();
 				else
 					activeProgram->OnRightKeyReleased();
 			}
@@ -81,7 +81,7 @@ int LCD_OS::start()
 			if (this->keyboardThread.isPressKeyEvent)
 			{
 				if (this->keyboardThread.isPressKey)
-					activeProgram->OnPressKeyPresseed();
+					activeProgram->OnPressKeyPressed();
 				else
 					activeProgram->OnPressKeyReleased();
 			}
@@ -89,7 +89,7 @@ int LCD_OS::start()
 			if (this->keyboardThread.isKey1Event)
 			{
 				if (this->keyboardThread.isKey1)
-					activeProgram->OnKey1Presseed();
+					activeProgram->OnKey1Pressed();
 				else
 					activeProgram->OnKey1Released();
 			}
@@ -97,7 +97,7 @@ int LCD_OS::start()
 			if (this->keyboardThread.isKey2Event)
 			{
 				if (this->keyboardThread.isKey2)
-					activeProgram->OnKey2Presseed();
+					activeProgram->OnKey2Pressed();
 				else
 					activeProgram->OnKey2Released();
 			}
@@ -105,7 +105,7 @@ int LCD_OS::start()
 			if (this->keyboardThread.isKey3Event)
 			{
 				if (this->keyboardThread.isKey3)
-					activeProgram->OnKey3Presseed();
+					activeProgram->OnKey3Pressed();
 				else
 					activeProgram->OnKey3Released();
 			}
