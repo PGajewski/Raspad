@@ -34,7 +34,7 @@ int LCD_OS::start()
 
 	for (;;)
 	{
-		std::thread thr(*activeProgram);
+		std::thread thr(*activeProgram.get());
 		for (;;)
 		{
 			this->waitForSignal();
