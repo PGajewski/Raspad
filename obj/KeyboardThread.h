@@ -14,7 +14,6 @@ class KeyboardThread : std::thread
 private:
 	KeyboardThread();
 	KeyboardThread(const KeyboardThread &) = default;
-	KeyboardThread(KeyboardThread &&) = default;
 
 	/*Last event time*/
 	std::chrono::time_point<std::chrono::steady_clock> lastEventTime;
@@ -27,23 +26,23 @@ public:
 	bool isDebugKeyboard = true;
 
 	/*Bool variable for each button.*/
-	std::atomic_bool isUpKey;
-	std::atomic_bool isDownKey;
-	std::atomic_bool isLeftKey;
-	std::atomic_bool isRightKey;
-	std::atomic_bool isPressKey;
-	std::atomic_bool isKey1;
-	std::atomic_bool isKey2;
-	std::atomic_bool isKey3;
+	std::atomic_bool isUpKey(false);
+	std::atomic_bool isDownKey(false);
+	std::atomic_bool isLeftKey(false);
+	std::atomic_bool isRightKey(false);
+	std::atomic_bool isPressKey(false);
+	std::atomic_bool isKey1(false);
+	std::atomic_bool isKey2(false);
+	std::atomic_bool isKey3(false);
 
-	std::atomic_bool isUpKeyEvent;
-	std::atomic_bool isDownKeyEvent;
-	std::atomic_bool isLeftKeyEvent;
-	std::atomic_bool isRightKeyEvent;
-	std::atomic_bool isPressKeyEvent;
-	std::atomic_bool isKey1Event;
-	std::atomic_bool isKey2Event;
-	std::atomic_bool isKey3Event;
+	std::atomic_bool isUpKeyEvent(true);
+	std::atomic_bool isDownKeyEvent(true);
+	std::atomic_bool isLeftKeyEvent(true);
+	std::atomic_bool isRightKeyEvent(true);
+	std::atomic_bool isPressKeyEvent(true);
+	std::atomic_bool isKey1Event(true);
+	std::atomic_bool isKey2Event(true);
+	std::atomic_bool isKey3Event(true);
 
 	static KeyboardThread & getKeyboardThread()
 	{

@@ -22,9 +22,6 @@ class LCD_OS
 private:
 	LCD_OS();
 	LCD_OS(const LCD_OS &) = default;
-	LCD_OS(LCD_OS &&) = default;
-	/*Keyboard events thread*/
-	KeyboardThread* keyboardThread = &KeyboardThread::getKeyboardThread();
 
 	/*Condition variable*/
 	std::condition_variable cv;
