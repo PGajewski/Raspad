@@ -15,11 +15,11 @@ CC = gcc-8.1.0
 
 CXX = g++-8.1.0
 
-DEBUG = -g -O0 -Wall
-CFLAGS += $(DEBUG)
+CFLAGS += -Wall
 
-CXXFLAGS = -std=c++17
-CXX_FLAGS += $(DEBUG)
+DEBUG = -g -DDEBUG -O0
+
+CXXFLAGS = -std=c++17 -Wall
 
 OP_FLAG = -O3
 
@@ -27,19 +27,25 @@ LIB = -lbcm2835
 CXXLIB = -I/usr/include/opencv2 -I/usr/include/glib-2.0  -pthread -lstdc++fs -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_videoio
 
 
-${TARGET}:${OBJ_O} 
+${TARGET}:${OBJ_O}
 	$(CXX) $(CXXFLAGS) $(OBJ_CXX)  -o $@ $(OBJ_O) $(LIB) $(CXXLIB)
 
 ${DIR_BIN}/%.o:$(DIR_OBJ)/%.c
-	$(CC) $(CFLAGS) -c  $< -o $@ $(LIB)
+	$(CC) $(OP_FLAG)  $(CFLAGS) -c  $< -o $@ $(LIB)
 
 ${DIR_BIN}/%.o:$(DIR_FONTS)/%.c
-	$(CC) $(CFLAGS) -c  $< -o $@ $(LIB)
+	$(CC) $(OP_FLAG) $(CFLAGS) -c  $< -o $@ $(LIB)
 
-	
 clean :
-	rm $(DIR_BIN)/*.* 
-	rm $(TARGET) 
+	rm $(DIR_BIN)/*.*
+	rm $(TARGET)
 
-optimal :
-	$(CXX) $(CXXFLAGS) $(OP_FLAG) $(OBJ_CXX)  -o $(OBJ_O) $(LIB) $(CXXLIB)
+optimal : ${OBJ_O}
+	$(CXX) $(CXXFLAGS) $(OP_FLAG) $(OBJ_CXX) -o $(TARGET) $(OBJ_O) $(LIB) $(CXXLIB)
+
+debug : CXXFLAGS += $(DEBUG)
+debug :	CFLAGS += $(DEBUG)
+debug : OPT_FLAG = -O0
+
+debug : ${OBJ_O}
+	$(CXX) $(CXXFLAGS) $(OP_FLAG) $(OBJ_CXX) -o $(TARGET) $(OBJ_O) $(LIB) $(CXXLIB)
