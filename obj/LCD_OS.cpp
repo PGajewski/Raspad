@@ -35,7 +35,7 @@ int LCD_OS::start()
 	for (;;)
 	{
 		//TODO: make correct program activacion
-		std::thread thr(&Foo::operator(), activeProgram);
+		std::thread thr(&Program::operator(), activeProgram);
 		for (;;)
 		{
 			this->waitForSignal();
