@@ -35,7 +35,7 @@ int LCD_OS::start()
 	for (;;)
 	{
 		//TODO: make correct program activacion
-		std::thread thr(*std::dynamic_pointer_cast<MainScreen>(activeProgram));
+		std::thread thr(activeProgram);
 		for (;;)
 		{
 			this->waitForSignal();
