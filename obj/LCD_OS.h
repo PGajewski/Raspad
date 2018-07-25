@@ -55,6 +55,12 @@ public:
 		cv.notify_one();
 	}
 
+	inline void returnToMainProgram()
+	{
+		sleepingProgramsList.push_back(activeProgram);
+		activeProgram = mainProgram;
+	}
+
 	void setActiveProgram(std::shared_ptr<Program> newProgram, bool wakeOld);
 
 	~LCD_OS();

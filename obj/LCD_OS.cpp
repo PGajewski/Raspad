@@ -34,6 +34,7 @@ int LCD_OS::start()
 
 	for (;;)
 	{
+		//TODO: make correct program activacion
 		std::thread thr(*std::dynamic_pointer_cast<MainScreen>(activeProgram));
 		for (;;)
 		{
@@ -44,6 +45,14 @@ int LCD_OS::start()
 			{
 				LCD_ShowBmp("/raspad/pic/logo.bmp");
 				continue;
+			}
+
+			//Check is program end.
+			if (!activeProgram->running.load())
+			{
+				//Wait for end of thread.
+				thr.join();
+				break;
 			}
 
 			//Modify content of programs.
@@ -90,7 +99,6 @@ int LCD_OS::start()
 				else
 					activeProgram->OnPressKeyReleased();
 				KeyboardThread::getKeyboardThread().isPressKeyEvent.store(false);
-
 			}
 
 			if (KeyboardThread::getKeyboardThread().isKey1Event.load())

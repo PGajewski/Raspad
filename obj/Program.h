@@ -1,5 +1,16 @@
 #pragma once
 #include <thread>
+#include <atomic>
+#include <chrono>
+
+extern "C"
+{
+#include <bcm2835.h>
+#include "DEV_Config.h"
+#include "LCD_Driver.h"
+#include "LCD_GUI.h"
+#include "LCD_BMP.h"
+}
 
 class Program
 {
@@ -11,33 +22,35 @@ public:
 	inline std::string getName() { return this->name; }
 	inline std::string getIcone() { return this->icone_path; }
 
+	std::atomic_bool running{ true };
+
 	/*Functions to handle signals from operational system*/
-	virtual void OnLeftKeyPressed() = 0;
-	virtual void OnLeftKeyReleased() = 0;
+	virtual void OnLeftKeyPressed();
+	virtual void OnLeftKeyReleased();
 
-	virtual void OnRightKeyPressed() = 0;
-	virtual void OnRightKeyReleased() = 0;
+	virtual void OnRightKeyPressed();
+	virtual void OnRightKeyReleased();
 
-	virtual void OnUpKeyPressed() = 0;
-	virtual void OnUpKeyReleased() = 0;
+	virtual void OnUpKeyPressed();
+	virtual void OnUpKeyReleased();
 
-	virtual void OnDownKeyPressed() = 0;
-	virtual void OnDownKeyReleased() = 0;
+	virtual void OnDownKeyPressed();
+	virtual void OnDownKeyReleased();
 
-	virtual void OnPressKeyPressed() = 0;
-	virtual void OnPressKeyReleased() = 0;
+	virtual void OnPressKeyPressed();
+	virtual void OnPressKeyReleased();
 
-	virtual void OnKey1Pressed() = 0;
-	virtual void OnKey1Released() = 0;
+	virtual void OnKey1Pressed();
+	virtual void OnKey1Released();
 
-	virtual void OnKey2Pressed() = 0;
-	virtual void OnKey2Released() = 0;
+	virtual void OnKey2Pressed();
+	virtual void OnKey2Released();
 
-	virtual void OnKey3Pressed() = 0;
-	virtual void OnKey3Released() = 0;
+	virtual void OnKey3Pressed();
+	virtual void OnKey3Released();
 
-	virtual void OnExit() = 0;
+	virtual void OnExit();
 
 	/*Thread function - pure virtual*/
-	virtual void operator()() = 0;
+	virtual void operator()();
 };
