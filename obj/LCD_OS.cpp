@@ -63,7 +63,7 @@ int LCD_OS::start()
 				else
 					activeProgram->OnUpKeyReleased();
 				KeyboardThread::getKeyboardThread().isUpKeyEvent.store(false);
-			}
+			
 
 			if (KeyboardThread::getKeyboardThread().isDownKeyEvent.load())
 			{
