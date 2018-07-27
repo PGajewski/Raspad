@@ -24,7 +24,7 @@ int LCD_OS::start()
 {
 	//1.System Initialization
 	if (System_Init())
-		return(0);
+		return(-1);
 
 	//2.show
 	std::cout << "**********Init LCD**********\r" << std::endl;
