@@ -123,6 +123,16 @@ public:
 			LCD_ShowBmp(path);
 		}
 	}
+
+	inline void LCD_Clear(COLOR  Color)
+	{
+		if (!isOSUsingScreen.load())
+		{
+			LCD_Clear(Color);
+		}
+	}
+
+
 	inline void returnToMainProgram()
 	{
 		sleepingProgramsList.push_back(activeProgram);
