@@ -39,7 +39,7 @@ void FileManager::printDirectoryContent()
 		if (i == actualPosition)
 		{
 			//Print rectangle for actual position.
-			LCD_OS::getLCDOperationSystem().OS_GUI_DrawRectangle(actualPosY, actualPosY + 2 * DISPLAY_INC_Y + FONT_SIZE, 0, LCD_WIDTH, SELECTION_COLOR, DRAW_FULL, DOT_PIXEL_DFT);
+			LCD_OS::getLCDOperationSystem().OS_GUI_DrawRectangle(0, actualPosY, LCD_WIDTH, actualPosY + 2 * DISPLAY_INC_Y + FONT_SIZE, SELECTION_COLOR, DRAW_FULL, DOT_PIXEL_DFT);
 		}
 		LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, actualPosY + DISPLAY_INC_Y, (*it).c_str(), FONT, BACKGROUND, FONT_COLOR);
 		
