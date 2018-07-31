@@ -120,8 +120,9 @@ public:
 	{
 		if(!isOSUsingScreen.load())
 		{
-			LCD_ShowBmp(path);
+			return LCD_ShowBmp(path);
 		}
+		return 0;
 	}
 
 	inline void OS_LCD_Clear(COLOR Color)
