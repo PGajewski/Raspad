@@ -5,7 +5,7 @@
 FileManager::FileManager(std::string start_path) : Program("FileManager", "pic/FileManager")
 {
 	//Split start path.
-	mySplit<std::vector>(start_path, pathVector, '/');
+	mySplit<std::vector<std::string>>(start_path, pathVector, '/');
 
 	//Delete empty strings.
 	auto itr = std::find(pathVector.begin(), pathVector.end(), "");
@@ -155,7 +155,7 @@ void FileManager::OnExit()
 void FileManager::operator()()
 {
 	/*Main loop of program*/
-	while (True)
+	while (true)
 	{
 		//Update actual directory content.
 		updateDirectoryContent();

@@ -26,7 +26,7 @@ private:
 	const int DISPLAY_START_POS_Y = 10;
 	const int DISPLAY_INC_Y = 4;
 	const int FONT_SIZE = 12;
-	const sFONT* FONT = &Font12;
+	sFONT* FONT = &Font12;
 	const COLOR BACKGROUND = WHITE;
 	const COLOR FONT_COLOR = BLACK;
 	const COLOR SELECTION_COLOR = RED;
