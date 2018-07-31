@@ -3,6 +3,8 @@
 #include <atomic>
 #include <chrono>
 #include "LCD_Driver.h"
+#include "LCD_GUI.h"
+#include "split_string.h"
 
 class Program
 {

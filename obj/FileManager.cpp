@@ -8,8 +8,8 @@ FileManager::FileManager(std::string start_path) : Program("FileManager", "pic/F
 	mySplit<std::vector>(start_path, pathVector, '/');
 
 	//Delete empty strings.
-	auto itr = std::find(v.begin(), v.end(), "");
-	if (itr != v.end()) v.erase(itr);
+	auto itr = std::find(pathVector.begin(), pathVector.end(), "");
+	if (itr != pathVector.end()) pathVector.erase(itr);
 }
 
 std::string FileManager::getActualPath()
@@ -26,7 +26,7 @@ void FileManager::updateDirectoryContent()
 {
 	for (auto & p : fs::directory_iterator(this->getActualPath()))
 	{
-		directoryContent.push_back(p.string());
+		directoryContent.push_back(p.path().string());
 	}
 }
 
@@ -65,7 +65,7 @@ void FileManager::OnLeftKeyReleased()
 void FileManager::OnRightKeyPressed()
 {
 	//Go to next folder.
-	const std::string temp_file_path = getActualPath() + "/" + directoryContent[actualPosition.load();
+	const std::string temp_file_path = getActualPath() + "/" + directoryContent[actualPosition.load()];
 	const fs::path path(temp_file_path);
 	std::error_code ec;
 	//Check file is directory.
