@@ -4,7 +4,9 @@
 #include <sstream>
 #include "../Fonts/fonts.h"
 #include <atomic>
-#include <filesystem>
+#include <experimental/filesystem>
+
+namespace fs = std::experimental::filesystem;
 
 class FileManager : public Program
 {
