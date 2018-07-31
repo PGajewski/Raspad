@@ -1,4 +1,6 @@
 #include "LCD_OS.h"
+#include "MainScreen.h"
+#include "FileManager.h"
 
 LCD_OS::LCD_OS()
 {
