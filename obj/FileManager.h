@@ -5,6 +5,7 @@
 #include "../Fonts/fonts.h"
 #include <atomic>
 #include <experimental/filesystem>
+#include <algorithm>
 
 namespace fs = std::experimental::filesystem;
 
@@ -18,7 +19,7 @@ private:
 	void printDirectoryContent();
 
 	//Position pointer.
-	std::atomic_uint actualPosition = 0;
+	std::atomic_uint actualPosition{ 0 };
 
 	/*Class parameters*/
 	const int DISPLAY_START_POS_X = 5;

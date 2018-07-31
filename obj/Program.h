@@ -2,6 +2,7 @@
 #include <thread>
 #include <atomic>
 #include <chrono>
+#include "LCD_Driver.h"
 
 class Program
 {
