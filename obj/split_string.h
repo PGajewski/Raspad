@@ -1,4 +1,8 @@
 #pragma once
+#include <iostream>
+#include <sstream>
+#include <iomanip>
+
 template <class Container>
 void mySplit(const std::string& str, Container& cont, char delim = ' ')
 {
