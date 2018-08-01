@@ -30,6 +30,28 @@ void FileManager::updateDirectoryContent()
 	}
 }
 
+std::string FileManager::getNumberOfFilesInDirectory(std::string& path)
+{
+	std::stringstream command;
+	command << "ls -a " << path << " | wc -l";
+	return system(command.str());
+}
+
+std::string FileManager::getSizeOfFile(std::string& path)
+{
+	std::stringstream command;
+	command << "du - h " << path;
+	return system(command.str());
+
+}
+
+std::string FileManager::getFileDescription(std::string& path)
+{
+	std::stringstream command;
+	command << "file " << path;
+	return system(command.str());
+}
+
 void FileManager::printDirectoryContent()
 {
 	int actualPosY = DISPLAY_START_POS_Y;

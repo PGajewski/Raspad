@@ -31,6 +31,7 @@ private:
 	const COLOR FONT_COLOR = BLACK;
 	const COLOR SELECTION_COLOR = RED;
 
+
 public:
 	FileManager(std::string start_path);
 	FileManager() : Program("FileManager", "pic/FileManager") {}
