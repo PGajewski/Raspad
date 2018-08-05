@@ -46,7 +46,7 @@ std::string FileManager::getNumberOfFilesInDirectory(std::string& path)
 	return system(command.str());
 }
 
-std::string FileManager::getSizeOfFile(std::string& path)
+std::string FileManager::getSizeOfFile(std::string& path) const
 {
 	std::stringstream command;
 	command << "du - h " << path;
@@ -54,7 +54,7 @@ std::string FileManager::getSizeOfFile(std::string& path)
 
 }
 
-std::string FileManager::getFileDescription(std::string& path)
+std::string FileManager::getFileDescription(std::string& path) const
 {
 	std::stringstream command;
 	command << "file " << path;
