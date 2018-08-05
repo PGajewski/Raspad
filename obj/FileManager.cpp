@@ -43,14 +43,14 @@ std::string FileManager::getNumberOfFilesInDirectory(std::string& path) const
 {
 	std::stringstream command;
 	command << "ls -a " << path << " | wc -l";
-	return system(command.str());
+	return system(command.str().c_str());
 }
 
 std::string FileManager::getSizeOfFile(std::string& path) const
 {
 	std::stringstream command;
 	command << "du - h " << path;
-	return system(command.str());
+	return system(command.str().c_str());
 
 }
 
@@ -58,7 +58,7 @@ std::string FileManager::getFileDescription(std::string& path) const
 {
 	std::stringstream command;
 	command << "file " << path;
-	return system(command.str());
+	return system(command.str().c_str());
 }
 
 void FileManager::printDirectoryContent()
