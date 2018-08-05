@@ -23,8 +23,10 @@ private:
 
 	//Position pointer.
 	std::atomic_uint actualPosition{ 0 };
+	std::atomic_uint actualFirstCharIndex{ 0 };
 
 	/*Class parameters*/
+	const int DISPLAY_MAX_CHARS = 16;
 	const int DISPLAY_START_POS_X = 5;
 	const int DISPLAY_START_POS_Y = 10;
 	const int DISPLAY_INC_Y = 4;

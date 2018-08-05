@@ -73,6 +73,7 @@ void FileManager::printDirectoryContent()
 	int max = min + LINE_ON_PAGE;
 	for (int i = min; i < max; ++i)
 	{
+		int posOffset = 0;
 		COLOR actual_background_color = BACKGROUND;
 		COLOR actual_font_color;
 		if (i == actualPosition)
@@ -81,19 +82,22 @@ void FileManager::printDirectoryContent()
 
 			//Print rectangle for actual position.
 			LCD_OS::getLCDOperationSystem().OS_GUI_DrawRectangle(0, actualPosY + DISPLAY_INC_Y, LCD_WIDTH, actualPosY + 2 * DISPLAY_INC_Y + FONT_SIZE, SELECTION_COLOR, DRAW_FULL, DOT_PIXEL_DFT);
+			posOffset = actualFirstCharIndex.load();
+			actualFirstCharIndex.store((posOffset + 1) % (directoryContent[i].length() - DISPLAY_MAX_CHARS));
 		}
 
 		std::string temp_file_path = getActualPath() + directoryContent[i];
 		fs::path path(temp_file_path);
-       		std::error_code ec;
+       	std::error_code ec;
 
-        	//Check file is directory.
-        	if (fs::is_directory(path, ec))
+        //Check file is directory.
+        if (fs::is_directory(path, ec))
 			actual_font_color = DIR_FONT_COLOR;
+
 		else
 			actual_font_color = FILE_FONT_COLOR;
 
-		LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, actualPosY + DISPLAY_INC_Y, directoryContent[i].c_str(), FONT, actual_background_color, actual_font_color);
+		LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, actualPosY + DISPLAY_INC_Y, directoryContent[i].substr(posOffset, posOffset + DISPLAY_MAX_CHARS).c_str(), FONT, actual_background_color, actual_font_color);
 
 		//Update position;
 		if (actualPosY >= LCD_HEIGHT)
