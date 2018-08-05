@@ -20,7 +20,7 @@ private:
 	void printDirectoryContent();
 	std::string FileManager::getSizeOfFile(std::string& path) const;
 	std::string getFileDescription(std::string& path) const;
-
+	std::string FileManager::getNumberOfFilesInDirectory(std::string& path) const;
 
 	std::atomic_bool wasChange{true};
 

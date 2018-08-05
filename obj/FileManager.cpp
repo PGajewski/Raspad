@@ -39,7 +39,7 @@ void FileManager::updateDirectoryContent()
 	std::sort(directoryContent.begin(), directoryContent.end());
 }
 
-std::string FileManager::getNumberOfFilesInDirectory(std::string& path)
+std::string FileManager::getNumberOfFilesInDirectory(std::string& path) const
 {
 	std::stringstream command;
 	command << "ls -a " << path << " | wc -l";
