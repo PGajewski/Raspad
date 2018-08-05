@@ -7,6 +7,7 @@
 #include <atomic>
 #include <filesystem>
 #include <algorithm>
+#include "command_line.h"
 
 namespace fs = std::filesystem;
 
