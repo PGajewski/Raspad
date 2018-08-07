@@ -79,7 +79,7 @@ void FileManager::updateActualChosenOption()
 
 	LCD_OS::getLCDOperationSystem().OS_GUI_DrawRectangle(0, actualPosY + DISPLAY_INC_Y, LCD_WIDTH, actualPosY + 2 * DISPLAY_INC_Y + FONT_SIZE, SELECTION_COLOR, DRAW_FULL, DOT_PIXEL_DFT);
 
-	LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, actualPosY + DISPLAY_INC_Y, directoryContent[actualPosition].substr(posOffset,DISPLAY_MAX_CHARS - 1 - posOffset).c_str(), FONT, SELECTION_COLOR, actual_font_color);
+	LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, actualPosY + DISPLAY_INC_Y, directoryContent[actualPosition].substr(posOffset,DISPLAY_MAX_CHARS - 1).c_str(), FONT, SELECTION_COLOR, actual_font_color);
 
 
 }
