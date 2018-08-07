@@ -112,15 +112,16 @@ void FileManager::printDirectoryContent()
 
 			//Print rectangle for actual position.
 			LCD_OS::getLCDOperationSystem().OS_GUI_DrawRectangle(0, actualPosY + DISPLAY_INC_Y, LCD_WIDTH, actualPosY + 2 * DISPLAY_INC_Y + FONT_SIZE, SELECTION_COLOR, DRAW_FULL, DOT_PIXEL_DFT);
-		}
 
-		if (directoryContent[i].length() > DISPLAY_MAX_CHARS)
-		{
-			actualFirstCharIndex.store(1);
-		}
-		else
-		{
-			actualFirstCharIndex.store(-1);
+			if (directoryContent[i].length() > DISPLAY_MAX_CHARS)
+			{
+				actualFirstCharIndex.store(1);
+			}
+			else
+			{
+				actualFirstCharIndex.store(-1);
+			}
+		
 		}
 
 		std::string temp_file_path = getActualPath() + directoryContent[i];
