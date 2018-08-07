@@ -62,7 +62,7 @@ void FileManager::updateActualChosenOption()
 	int actualPosY = DISPLAY_START_POS_Y + actualPosition * (2 * DISPLAY_INC_Y + FONT_SIZE);
 
 
-	actualFirstCharIndex.store((posOffset + 1) % (directoryContent[actualPosition].length() - DISPLAY_MAX_CHARS));
+	actualFirstCharIndex.store((posOffset + 1) % (directoryContent[actualPosition].length() - DISPLAY_MAX_CHARS + 1));
 
 	std::string temp_file_path = getActualPath() + directoryContent[actualPosition];
 	fs::path path(temp_file_path);
@@ -73,13 +73,12 @@ void FileManager::updateActualChosenOption()
 	//Check file is directory.
 	if (fs::is_directory(path, ec))
 		actual_font_color = DIR_FONT_COLOR;
-
 	else
 		actual_font_color = FILE_FONT_COLOR;
 
 	LCD_OS::getLCDOperationSystem().OS_GUI_DrawRectangle(0, actualPosY + DISPLAY_INC_Y, LCD_WIDTH, actualPosY + 2 * DISPLAY_INC_Y + FONT_SIZE, SELECTION_COLOR, DRAW_FULL, DOT_PIXEL_DFT);
 
-	LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, actualPosY + DISPLAY_INC_Y, directoryContent[actualPosition].substr(posOffset,DISPLAY_MAX_CHARS - 1).c_str(), FONT, SELECTION_COLOR, actual_font_color);
+	LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, actualPosY + DISPLAY_INC_Y, directoryContent[actualPosition].substr(posOffset,DISPLAY_MAX_CHARS).c_str(), FONT, SELECTION_COLOR, actual_font_color);
 
 
 }
@@ -115,7 +114,7 @@ void FileManager::printDirectoryContent()
 
 			if (directoryContent[i].length() > DISPLAY_MAX_CHARS)
 			{
-				actualFirstCharIndex.store(1);
+				actualFirstCharIndex.store(0);
 			}
 			else
 			{
