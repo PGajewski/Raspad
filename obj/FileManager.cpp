@@ -99,7 +99,16 @@ void FileManager::printDirectoryContent()
 
 	//Count range of positions to display.
 	int min = actualPosition - actualPosition%LINE_ON_PAGE;
-	int max = min + LINE_ON_PAGE;
+	int max;
+	if (min + LINE_ON_PAGE < directoryContent.size())
+	{
+		max = min + LINE_ON_PAGE;
+	}
+	else
+	{
+		max = directoryContent.size();
+	}
+
 	for (int i = min; i < max; ++i)
 	{
 		int posOffset = 0;
