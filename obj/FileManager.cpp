@@ -114,6 +114,15 @@ void FileManager::printDirectoryContent()
 			LCD_OS::getLCDOperationSystem().OS_GUI_DrawRectangle(0, actualPosY + DISPLAY_INC_Y, LCD_WIDTH, actualPosY + 2 * DISPLAY_INC_Y + FONT_SIZE, SELECTION_COLOR, DRAW_FULL, DOT_PIXEL_DFT);
 		}
 
+		if (directoryContent[i].length() > DISPLAY_MAX_CHARS)
+		{
+			actualFirstCharIndex.store(1);
+		}
+		else
+		{
+			actualFirstCharIndex.store(-1);
+		}
+
 		std::string temp_file_path = getActualPath() + directoryContent[i];
 		fs::path path(temp_file_path);
        	std::error_code ec;
@@ -129,14 +138,6 @@ void FileManager::printDirectoryContent()
 		if (directoryContent[i].length() > DISPLAY_MAX_CHARS)
 		{
 			LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, actualPosY + DISPLAY_INC_Y, directoryContent[i].substr(0, DISPLAY_MAX_CHARS - 1).c_str(), FONT, actual_background_color, actual_font_color);
-			if (i == actualPosition)
-			{
-				actualFirstCharIndex.store(0);
-			}
-			else
-			{
-				actualFirstCharIndex.store(-1);
-			}
 		}
 		else
 			LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, actualPosY + DISPLAY_INC_Y, directoryContent[i].c_str(), FONT, actual_background_color, actual_font_color);
