@@ -54,6 +54,35 @@ std::string FileManager::getSizeOfFile(std::string& path) const
 
 }
 
+void updateActualChosenOption()
+{
+	LCD_OS::getLCDOperationSystem().OS_GUI_DrawRectangle(0, actualPosY + DISPLAY_INC_Y, LCD_WIDTH, actualPosY + 2 * DISPLAY_INC_Y + FONT_SIZE, SELECTION_COLOR, DRAW_FULL, DOT_PIXEL_DFT);
+	int posOffset = actualFirstCharIndex.load();
+
+	//Count actual position.
+	int actualPosY = DISPLAY_START_POS_Y + actualPosition * (2 * DISPLAY_INC_Y + FONT_SIZE);
+
+
+	actualFirstCharIndex.store((posOffset + 1) % (directoryContent[actualPosition].length() - DISPLAY_MAX_CHARS));
+
+	std::string temp_file_path = getActualPath() + directoryContent[actualPosition];
+	fs::path path(temp_file_path);
+	std::error_code ec;
+
+	COLOR actual_font_color;
+
+	//Check file is directory.
+	if (fs::is_directory(path, ec))
+		actual_font_color = DIR_FONT_COLOR;
+
+	else
+		actual_font_color = FILE_FONT_COLOR;
+
+	LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, actualPosY + DISPLAY_INC_Y, directoryContent[i].substr(posOffset, posOffset + DISPLAY_MAX_CHARS - 1).c_str(), FONT, actual_background_color, actual_font_color);
+
+
+}
+
 std::string FileManager::getFileDescription(std::string& path) const
 {
 	std::stringstream command;
@@ -82,8 +111,6 @@ void FileManager::printDirectoryContent()
 
 			//Print rectangle for actual position.
 			LCD_OS::getLCDOperationSystem().OS_GUI_DrawRectangle(0, actualPosY + DISPLAY_INC_Y, LCD_WIDTH, actualPosY + 2 * DISPLAY_INC_Y + FONT_SIZE, SELECTION_COLOR, DRAW_FULL, DOT_PIXEL_DFT);
-			posOffset = actualFirstCharIndex.load();
-			actualFirstCharIndex.store((posOffset + 1) % (directoryContent[i].length() - DISPLAY_MAX_CHARS));
 		}
 
 		std::string temp_file_path = getActualPath() + directoryContent[i];
@@ -98,8 +125,18 @@ void FileManager::printDirectoryContent()
 			actual_font_color = FILE_FONT_COLOR;
 
 		//Analize size of actual string to display.
-		if(directoryContent[i].length() > DISPLAY_MAX_CHARS)
-			LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, actualPosY + DISPLAY_INC_Y, directoryContent[i].substr(posOffset, posOffset + DISPLAY_MAX_CHARS-1).c_str(), FONT, actual_background_color, actual_font_color);
+		if (directoryContent[i].length() > DISPLAY_MAX_CHARS)
+		{
+			LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, actualPosY + DISPLAY_INC_Y, directoryContent[i].substr(0, DISPLAY_MAX_CHARS - 1).c_str(), FONT, actual_background_color, actual_font_color);
+			if (i == actualPosition)
+			{
+				actualFirstCharIndex.store(0);
+			}
+			else
+			{
+				actualFirstCharIndex.store(-1);
+			}
+		}
 		else
 			LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, actualPosY + DISPLAY_INC_Y, directoryContent[i].c_str(), FONT, actual_background_color, actual_font_color);
 
@@ -241,6 +278,10 @@ void FileManager::operator()()
 			printDirectoryContent();
 
 			wasChange.store(false);
+		}
+		else if(!(actualFirstCharIndex.load() < 0))
+		{
+			updateActualChosenOption();
 		}
 		std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	}

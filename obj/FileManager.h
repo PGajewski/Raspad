@@ -27,7 +27,7 @@ private:
 
 	//Position pointer.
 	std::atomic_uint actualPosition{ 0 };
-	std::atomic_uint actualFirstCharIndex{ 0 };
+	std::atomic_int actualFirstCharIndex{ 0 };
 
 	/*Class parameters*/
 	const int DISPLAY_MAX_CHARS = 16;
