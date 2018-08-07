@@ -220,7 +220,7 @@ void FileManager::OnUpKeyReleased()
 
 void FileManager::OnDownKeyPressed()
 {
-	if (actualPosition < directoryContent.size())
+	if (actualPosition.load() < directoryContent.size())
 	{
 		++actualPosition;
 		actualFirstCharIndex.store(0);

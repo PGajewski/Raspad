@@ -36,7 +36,7 @@ private:
 	const int DISPLAY_START_POS_Y = 10;
 	const int DISPLAY_INC_Y = 4;
 	const int FONT_SIZE = 8;
-	const int LINE_ON_PAGE = 8;
+	const int LINE_ON_PAGE = 7;
 	sFONT* FONT = &Font12;
 	const COLOR BACKGROUND = BLACK;
 	const COLOR FILE_FONT_COLOR = WHITE;
