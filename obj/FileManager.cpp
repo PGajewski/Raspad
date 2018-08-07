@@ -119,6 +119,7 @@ void FileManager::printDirectoryContent()
 			}
 			else
 			{
+				std::cout << "Test" << std::endl;
 				actualFirstCharIndex.store(-1);
 			}
 		
