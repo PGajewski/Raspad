@@ -97,7 +97,11 @@ void FileManager::printDirectoryContent()
 		else
 			actual_font_color = FILE_FONT_COLOR;
 
-		LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, actualPosY + DISPLAY_INC_Y, directoryContent[i].substr(posOffset, posOffset + DISPLAY_MAX_CHARS).c_str(), FONT, actual_background_color, actual_font_color);
+		//Analize size of actual string to display.
+		if(directoryContent[i].length() > DISPLAY_MAX_CHARS)
+			LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, actualPosY + DISPLAY_INC_Y, directoryContent[i].substr(posOffset, posOffset + DISPLAY_MAX_CHARS-1).c_str(), FONT, actual_background_color, actual_font_color);
+		else
+			LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, actualPosY + DISPLAY_INC_Y, directoryContent[i].c_str(), FONT, actual_background_color, actual_font_color);
 
 		//Update position;
 		if (actualPosY >= LCD_HEIGHT)
@@ -115,6 +119,7 @@ void FileManager::OnLeftKeyPressed()
 	//Return to previous folder.
 	pathVector.pop_back();
 	actualPosition.store(0);
+	actualFirstCharIndex.store(0);
 	wasChange.store(true);
 }
 void FileManager::OnLeftKeyReleased()
@@ -133,6 +138,7 @@ void FileManager::OnRightKeyPressed()
 	{
 		pathVector.push_back(directoryContent[actualPosition.load()]);
 		actualPosition.store(0);
+		actualFirstCharIndex.store(0);
 		wasChange.store(true);
 		return;
 	}
@@ -153,6 +159,7 @@ void FileManager::OnUpKeyPressed()
 	if (actualPosition.load() != 0)
 	{
 		--actualPosition;
+		actualFirstCharIndex.store(0);
 		wasChange.store(true);
 	}
 }
@@ -166,6 +173,7 @@ void FileManager::OnDownKeyPressed()
 	if (actualPosition < directoryContent.size())
 	{
 		++actualPosition;
+		actualFirstCharIndex.store(0);
 		wasChange.store(true);
 	}
 }
