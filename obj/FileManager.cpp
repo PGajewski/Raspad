@@ -94,6 +94,9 @@ void FileManager::printDirectoryContent()
 {
 	int actualPosY = DISPLAY_START_POS_Y;
 	
+	//Save actual position by overload previous value from object.
+	const int actualPosition = this->actualPosition.load();
+
 	if(!directoryContent.size())
 		return;
 
@@ -164,7 +167,7 @@ void FileManager::showFileInfo()
 	LCD_OS::getLCDOperationSystem().OS_LCD_Clear(BACKGROUND);
 
 	//Check is directory.
-	const std::string temp_file = directoryContent[actualPosition.load()];
+	const std::string temp_file = directoryContent[actualPosition];
 	const std::string temp_file_path = getActualPath() + temp_file;
 	const fs::path path(temp_file_path);
 	std::error_code ec;
@@ -347,7 +350,7 @@ void FileManager::operator()()
 				{
 					LCD_OS::getLCDOperationSystem().OS_LCD_Clear(BACKGROUND);
 					//Update actual directory content.
-					updateDirectoryContent();
+					updateDirectoryContent(actualPosition.load(), actualFirstCharIndex.load());
 
 					//Print values.
 					printDirectoryContent();
