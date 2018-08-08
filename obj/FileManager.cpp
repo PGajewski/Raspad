@@ -160,6 +160,8 @@ void FileManager::printDirectoryContent()
 }
 void FileManager::showFileInfo()
 {
+	LCD_OS::getLCDOperationSystem().OS_LCD_Clear(BACKGROUND);
+
 	//Check is directory.
 	const std::string temp_file = directoryContent[actualPosition.load()];
 	const std::string temp_file_path = getActualPath() + temp_file;
@@ -301,6 +303,7 @@ void FileManager::OnKey1Pressed()
 void FileManager::OnKey1Released()
 {
 	content.store(VIEW);
+	wasChange.store(true);
 }
 
 /*
