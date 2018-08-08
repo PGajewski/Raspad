@@ -86,7 +86,7 @@ void FileManager::updateActualChosenOption()
 std::string FileManager::getFileDescription(const std::string& path) const
 {
 	std::stringstream command;
-	command << "file " << path << "| awk '{$1= ""; print $0}'";
+	command << "file " << path << "| awk '{$1= /"/"; print $0}'";
 	return exec(command.str().c_str());
 }
 
@@ -158,6 +158,7 @@ void FileManager::printDirectoryContent()
 			actualPosY += 2 * DISPLAY_INC_Y + FONT_SIZE;
 	}
 }
+
 void FileManager::showFileInfo()
 {
 	LCD_OS::getLCDOperationSystem().OS_LCD_Clear(BACKGROUND);
