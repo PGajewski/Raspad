@@ -21,8 +21,8 @@ private:
 	std::vector<std::string> pathVector;
 	std::vector<std::string> directoryContent;
 	std::string getActualPath();
-	void updateDirectoryContent();
-	void printDirectoryContent();
+	void updateDirectoryContent(const int actualPosition);
+	void printDirectoryContent(const int actualPosition);
 	void updateActualChosenOption();
 	void showFileInfo();
 	std::string getSizeOfFile(const std::string& path) const;

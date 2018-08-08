@@ -23,7 +23,7 @@ std::string FileManager::getActualPath()
 	return ss.str();
 }
 
-void FileManager::updateDirectoryContent()
+void FileManager::updateDirectoryContent(const int actualPosition)
 {
 	//Clear old content.
 	directoryContent.clear();
@@ -90,13 +90,10 @@ std::string FileManager::getFileDescription(const std::string& path) const
 	return exec(command.str().c_str());
 }
 
-void FileManager::printDirectoryContent()
+void FileManager::printDirectoryContent(const int actualPosition)
 {
 	int actualPosY = DISPLAY_START_POS_Y;
 	
-	//Save actual position by overload previous value from object.
-	const int actualPosition = this->actualPosition.load();
-
 	if(!directoryContent.size())
 		return;
 
@@ -262,7 +259,6 @@ void FileManager::OnUpKeyPressed()
 	if (actualPosition.load() != 0)
 	{
 		--actualPosition;
-		actualFirstCharIndex.store(0);
 		wasChange.store(true);
 	}
 }
@@ -282,7 +278,6 @@ void FileManager::OnDownKeyPressed()
 	if (actualPosition.load() < directoryContent.size()-1)
 	{
 		++actualPosition;
-		actualFirstCharIndex.store(0);
 		wasChange.store(true);
 	}
 }
@@ -348,12 +343,13 @@ void FileManager::operator()()
 			case VIEW:
 				if (wasChange.load())
 				{
+					const int actualPosition = this->actualPosition.load();
 					LCD_OS::getLCDOperationSystem().OS_LCD_Clear(BACKGROUND);
 					//Update actual directory content.
-					updateDirectoryContent(actualPosition.load(), actualFirstCharIndex.load());
+					updateDirectoryContent(actualPosition);
 
 					//Print values.
-					printDirectoryContent();
+					printDirectoryContent(actualPosition);
 
 					wasChange.store(false);
 				}
