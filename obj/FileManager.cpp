@@ -49,7 +49,7 @@ std::string FileManager::getNumberOfFilesInDirectory(const std::string& path) co
 std::string FileManager::getSizeOfFile(const std::string& path) const
 {
 	std::stringstream command;
-	command << "du -h | awk '{print $1;}" << path;
+	command << "du -h " << path << "| awk '{print $1;}'";
 	return exec(command.str().c_str());
 
 }
@@ -86,7 +86,7 @@ void FileManager::updateActualChosenOption()
 std::string FileManager::getFileDescription(const std::string& path) const
 {
 	std::stringstream command;
-	command << "file " << path;
+	command << "file " << path << "| awk '{$1= ""; print $0}'";
 	return exec(command.str().c_str());
 }
 
