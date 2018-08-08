@@ -165,7 +165,7 @@ void FileManager::showFileInfo()
 	const std::string temp_file_path = getActualPath() + temp_file;
 	const fs::path path(temp_file_path);
 	std::error_code ec;
-	const std::string v = getSizeOfFile(temp_file_path);
+	const std::string size = getSizeOfFile(temp_file_path);
 	const std::string description = getFileDescription(temp_file_path);
 
 	LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, DISPLAY_INC_Y, (std::string("Size: ") + size).c_str(), FONT, SELECTION_COLOR, FILE_FONT_COLOR);
