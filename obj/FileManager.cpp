@@ -176,15 +176,15 @@ void FileManager::showFileInfo()
 	if (fs::is_directory(path, ec))
 	{
 		const std::string number = getNumberOfFilesInDirectory(temp_file_path);
-		LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, DISPLAY_INC_Y * 2 + FONT_SIZE, (std::string("Files: ") + number).c_str(), FONT, SELECTION_COLOR, FILE_FONT_COLOR);
-		LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, DISPLAY_INC_Y * 3 + 2 * FONT_SIZE, "Description:", FONT, SELECTION_COLOR, FILE_FONT_COLOR);
-		LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, DISPLAY_INC_Y * 4 + 3 * FONT_SIZE, description.c_str(), FONT, SELECTION_COLOR, FILE_FONT_COLOR);
+		LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, DISPLAY_INC_Y * 2 + FONT_SIZE, (std::string("Files: ") + number).c_str(), FONT, BACKGROUND, FILE_FONT_COLOR);
+		LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, DISPLAY_INC_Y * 3 + 2 * FONT_SIZE, "Description:", FONT, BACKGROUND, FILE_FONT_COLOR);
+		LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, DISPLAY_INC_Y * 4 + 3 * FONT_SIZE, description.c_str(), FONT, BACKGROUND, FILE_FONT_COLOR);
 
 	}
 	else
 	{
-		LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, DISPLAY_INC_Y * 2 + FONT_SIZE, "Description:", FONT, SELECTION_COLOR, FILE_FONT_COLOR);
-		LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, DISPLAY_INC_Y * 3 + 2 * FONT_SIZE, description.c_str(), FONT, SELECTION_COLOR, FILE_FONT_COLOR);
+		LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, DISPLAY_INC_Y * 2 + FONT_SIZE, "Description:", FONT, BACKGROUND, FILE_FONT_COLOR);
+		LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, DISPLAY_INC_Y * 3 + 2 * FONT_SIZE, description.c_str(), FONT, BACKGROUND, FILE_FONT_COLOR);
 	}
 	if (ec) // Optional handling of possible errors.
 	{
