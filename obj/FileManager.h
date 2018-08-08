@@ -11,6 +11,10 @@
 
 namespace fs = std::filesystem;
 
+enum FileManagerContent {
+	VIEW, INFO
+};
+
 class FileManager : public Program
 {
 private:
@@ -29,6 +33,9 @@ private:
 	//Position pointer.
 	std::atomic_uint actualPosition{ 0 };
 	std::atomic_int actualFirstCharIndex{ 0 };
+
+	//Display screen pointer.
+	std::atomic<FileManagerContent> content = VIEW;
 
 	/*Class parameters*/
 	const int DISPLAY_MAX_CHARS = 16;

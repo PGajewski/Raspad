@@ -123,12 +123,10 @@ void FileManager::printDirectoryContent()
 
 			if (directoryContent[i].length() > DISPLAY_MAX_CHARS)
 			{
-				std::cout << "Test wyswietlania" << std::endl;
 				actualFirstCharIndex.store(0);
 			}
 			else
 			{
-				std::cout << "Test" << std::endl;
 				actualFirstCharIndex.store(-1);
 			}
 		
@@ -160,9 +158,46 @@ void FileManager::printDirectoryContent()
 			actualPosY += 2 * DISPLAY_INC_Y + FONT_SIZE;
 	}
 }
+void FileManager::showFileInfo()
+{
+	//Check is directory.
+	const std::string temp_file = directoryContent[actualPosition.load()];
+	const std::string temp_file_path = getActualPath() + temp_file;
+	const fs::path path(temp_file_path);
+	std::error_code ec;
+	const std::string v = getSizeOfFile(temp_file_path);
+	const std::string description = getFileDescription(temp_file_path);
+
+	LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, DISPLAY_INC_Y, (std::string("Size: ") + size).c_str(), FONT, SELECTION_COLOR, FILE_FONT_COLOR);
+
+	//Check file is directory.
+	if (fs::is_directory(path, ec))
+	{
+		const std::string number = getNumberOfFilesInDirectory(temp_file_path);
+		LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, DISPLAY_INC_Y * 2 + FONT_SIZE, (std::string("Files: ") + number).c_str(), FONT, SELECTION_COLOR, FILE_FONT_COLOR);
+		LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, DISPLAY_INC_Y * 3 + 2 * FONT_SIZE, "Description:", FONT, SELECTION_COLOR, FILE_FONT_COLOR);
+		LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, DISPLAY_INC_Y * 4 + 3 * FONT_SIZE, description.c_str(), FONT, SELECTION_COLOR, FILE_FONT_COLOR);
+
+	}
+	else
+	{
+		LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, DISPLAY_INC_Y * 2 + FONT_SIZE, "Description:", FONT, SELECTION_COLOR, FILE_FONT_COLOR);
+		LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, DISPLAY_INC_Y * 3 + 2 * FONT_SIZE, description.c_str(), FONT, SELECTION_COLOR, FILE_FONT_COLOR);
+	}
+	if (ec) // Optional handling of possible errors.
+	{
+		std::cerr << "Error in is_directory: " << ec.message();
+	}
+}
 
 void FileManager::OnLeftKeyPressed()
 {
+	//Ignore on INFO screen.
+	if (content.load() == INFO)
+	{
+		return;
+	}
+
 	if(pathVector.empty())
 		return;
 
@@ -179,6 +214,12 @@ void FileManager::OnLeftKeyReleased()
 
 void FileManager::OnRightKeyPressed()
 {
+	//Ignore on INFO screen.
+	if (content.load() == INFO)
+	{
+		return;
+	}
+
 	//Go to next folder.
 	const std::string temp_file = directoryContent[actualPosition.load()];
 	const std::string temp_file_path = getActualPath() + temp_file;
@@ -206,6 +247,12 @@ void FileManager::OnRightKeyReleased()
 
 void FileManager::OnUpKeyPressed()
 {
+	//Ignore on INFO screen.
+	if (content.load() == INFO)
+	{
+		return;
+	}
+
 	if (actualPosition.load() != 0)
 	{
 		--actualPosition;
@@ -220,7 +267,13 @@ void FileManager::OnUpKeyReleased()
 
 void FileManager::OnDownKeyPressed()
 {
-	if (actualPosition.load() < directoryContent.size())
+	//Ignore on INFO screen.
+	if (content.load() == INFO)
+	{
+		return;
+	}
+
+	if (actualPosition.load() < directoryContent.size()-1)
 	{
 		++actualPosition;
 		actualFirstCharIndex.store(0);
@@ -243,11 +296,11 @@ void FileManager::OnPressKeyReleased()
 
 void FileManager::OnKey1Pressed()
 {
-
+	content.store(INFO);
 }
 void FileManager::OnKey1Released()
 {
-
+	content.store(VIEW)
 }
 
 /*
@@ -281,20 +334,28 @@ void FileManager::operator()()
 	/*Main loop of program*/
 	while (true)
 	{
-		if(wasChange.load())
+		switch (content.load())
 		{
-			LCD_OS::getLCDOperationSystem().OS_LCD_Clear(BACKGROUND);
-			//Update actual directory content.
-			updateDirectoryContent();
+		case VIEW:
+			if (wasChange.load())
+			{
+				LCD_OS::getLCDOperationSystem().OS_LCD_Clear(BACKGROUND);
+				//Update actual directory content.
+				updateDirectoryContent();
 
-			//Print values.
-			printDirectoryContent();
+				//Print values.
+				printDirectoryContent();
 
-			wasChange.store(false);
-		}
-		else if(!(actualFirstCharIndex.load() < 0))
-		{
-			updateActualChosenOption();
+				wasChange.store(false);
+			}
+			else if (!(actualFirstCharIndex.load() < 0))
+			{
+				updateActualChosenOption();
+			}
+			break;
+		case INFO:
+			showFileInfo();
+			break;
 		}
 		std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	}
