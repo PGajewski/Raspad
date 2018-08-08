@@ -86,7 +86,7 @@ void FileManager::updateActualChosenOption()
 std::string FileManager::getFileDescription(const std::string& path) const
 {
 	std::stringstream command;
-	command << "file \"" << path << "\" | awk '{$1= \"\"; print $0}'";
+	command << "file -F '' \"" << path << "\" | sed s:\"" << path << "\"::";
 	return exec(command.str().c_str());
 }
 
