@@ -24,6 +24,7 @@ private:
 	void updateDirectoryContent();
 	void printDirectoryContent();
 	void updateActualChosenOption();
+	void showFileInfo();
 	std::string getSizeOfFile(std::string& path) const;
 	std::string getFileDescription(std::string& path) const;
 	std::string getNumberOfFilesInDirectory(std::string& path) const;

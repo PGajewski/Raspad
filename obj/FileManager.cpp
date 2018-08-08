@@ -300,7 +300,7 @@ void FileManager::OnKey1Pressed()
 }
 void FileManager::OnKey1Released()
 {
-	content.store(VIEW)
+	content.store(VIEW);
 }
 
 /*
