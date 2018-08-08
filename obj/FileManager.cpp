@@ -49,7 +49,7 @@ std::string FileManager::getNumberOfFilesInDirectory(const std::string& path) co
 std::string FileManager::getSizeOfFile(const std::string& path) const
 {
 	std::stringstream command;
-	command << "du -h " << path;
+	command << "du -h | awk '{print $1;}" << path;
 	return exec(command.str().c_str());
 
 }
@@ -170,7 +170,7 @@ void FileManager::showFileInfo()
 	const std::string size = getSizeOfFile(temp_file_path);
 	const std::string description = getFileDescription(temp_file_path);
 
-	LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, DISPLAY_INC_Y, (std::string("Size: ") + size).c_str(), FONT, SELECTION_COLOR, FILE_FONT_COLOR);
+	LCD_OS::getLCDOperationSystem().OS_GUI_DisString_EN(DISPLAY_START_POS_X, DISPLAY_INC_Y, (std::string("Size: ") + size).c_str(), FONT, BACKGROUND, FILE_FONT_COLOR);
 
 	//Check file is directory.
 	if (fs::is_directory(path, ec))
@@ -299,6 +299,8 @@ void FileManager::OnPressKeyReleased()
 void FileManager::OnKey1Pressed()
 {
 	content.store(INFO);
+	wasChange.store(true);
+
 }
 void FileManager::OnKey1Released()
 {
@@ -339,26 +341,29 @@ void FileManager::operator()()
 	{
 		switch (content.load())
 		{
-		case VIEW:
-			if (wasChange.load())
-			{
-				LCD_OS::getLCDOperationSystem().OS_LCD_Clear(BACKGROUND);
-				//Update actual directory content.
-				updateDirectoryContent();
+			case VIEW:
+				if (wasChange.load())
+				{
+					LCD_OS::getLCDOperationSystem().OS_LCD_Clear(BACKGROUND);
+					//Update actual directory content.
+					updateDirectoryContent();
 
-				//Print values.
-				printDirectoryContent();
+					//Print values.
+					printDirectoryContent();
 
-				wasChange.store(false);
-			}
-			else if (!(actualFirstCharIndex.load() < 0))
-			{
-				updateActualChosenOption();
-			}
-			break;
-		case INFO:
-			showFileInfo();
-			break;
+					wasChange.store(false);
+				}
+				else if (!(actualFirstCharIndex.load() < 0))
+				{
+					updateActualChosenOption();
+				}
+				break;
+			case INFO:
+				if (wasChange.load())
+				{
+					showFileInfo();
+				}
+				break;
 		}
 		std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	}
