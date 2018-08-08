@@ -39,14 +39,14 @@ void FileManager::updateDirectoryContent()
 	std::sort(directoryContent.begin(), directoryContent.end());
 }
 
-std::string FileManager::getNumberOfFilesInDirectory(std::string& path) const
+std::string FileManager::getNumberOfFilesInDirectory(const std::string& path) const
 {
 	std::stringstream command;
 	command << "ls -a " << path << " | wc -l";
 	return exec(command.str().c_str());
 }
 
-std::string FileManager::getSizeOfFile(std::string& path) const
+std::string FileManager::getSizeOfFile(const std::string& path) const
 {
 	std::stringstream command;
 	command << "du - h " << path;
@@ -83,7 +83,7 @@ void FileManager::updateActualChosenOption()
 
 }
 
-std::string FileManager::getFileDescription(std::string& path) const
+std::string FileManager::getFileDescription(const std::string& path) const
 {
 	std::stringstream command;
 	command << "file " << path;
