@@ -49,7 +49,7 @@ std::string FileManager::getNumberOfFilesInDirectory(const std::string& path) co
 std::string FileManager::getSizeOfFile(const std::string& path) const
 {
 	std::stringstream command;
-	command << "du - h " << path;
+	command << "du -h " << path;
 	return exec(command.str().c_str());
 
 }
