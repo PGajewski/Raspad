@@ -195,20 +195,25 @@ void FileManager::showFileInfo()
 
 void FileManager::OnLeftKeyPressed()
 {
-	//Ignore on INFO screen.
-	if (content.load() == INFO)
+	switch (content.load())
 	{
-		return;
+	case INFO:
+		//Do nothing.
+		break;
+	case VIEW:
+		if (pathVector.empty())
+			return;
+
+		//Return to previous folder.
+		pathVector.pop_back();
+		actualPosition.store(0);
+		wasChange.store(true);
+		break;
+	case SLEEP:
+		//Wake up.
+		wasChange.store(true);
+		break;
 	}
-
-	if(pathVector.empty())
-		return;
-
-	//Return to previous folder.
-	pathVector.pop_back();
-	actualPosition.store(0);
-	actualFirstCharIndex.store(0);
-	wasChange.store(true);
 }
 void FileManager::OnLeftKeyReleased()
 {
@@ -217,30 +222,35 @@ void FileManager::OnLeftKeyReleased()
 
 void FileManager::OnRightKeyPressed()
 {
-	//Ignore on INFO screen.
-	if (content.load() == INFO)
+	switch (content.load())
 	{
-		return;
-	}
-
-	//Go to next folder.
-	const std::string temp_file = directoryContent[actualPosition.load()];
-	const std::string temp_file_path = getActualPath() + temp_file;
-	const fs::path path(temp_file_path);
-	std::error_code ec;
-	//Check file is directory.
-	if (fs::is_directory(path, ec))
-	{
-		pathVector.push_back(temp_file);
-		actualPosition.store(0);
+	case INFO:
+		//Do nothing.
+		break;
+	case VIEW:
+		//Go to next folder.
+		const std::string temp_file = directoryContent[actualPosition.load()];
+		const std::string temp_file_path = getActualPath() + temp_file;
+		const fs::path path(temp_file_path);
+		std::error_code ec;
+		//Check file is directory.
+		if (fs::is_directory(path, ec))
+		{
+			pathVector.push_back(temp_file);
+			actualPosition.store(0);
+			wasChange.store(true);
+			return;
+		}
+		if (ec) // Optional handling of possible errors.
+		{
+			std::cerr << "Error in is_directory: " << ec.message();
+		}
+		break;
+	case SLEEP:
+		//Wake up.
 		wasChange.store(true);
-		return;
+		break;
 	}
-	if (ec) // Optional handling of possible errors.
-	{
-		std::cerr << "Error in is_directory: " << ec.message();
-	}
-
 }
 
 void FileManager::OnRightKeyReleased()
@@ -250,16 +260,22 @@ void FileManager::OnRightKeyReleased()
 
 void FileManager::OnUpKeyPressed()
 {
-	//Ignore on INFO screen.
-	if (content.load() == INFO)
+	switch (content.load())
 	{
-		return;
-	}
-
-	if (actualPosition.load() != 0)
-	{
-		--actualPosition;
+	case INFO:
+		//Do nothing.
+		break;
+	case VIEW:
+		if (actualPosition.load() != 0)
+		{
+			--actualPosition;
+			wasChange.store(true);
+		}
+		break;
+	case SLEEP:
+		//Wake up.
 		wasChange.store(true);
+		break;
 	}
 }
 void FileManager::OnUpKeyReleased()
@@ -269,16 +285,22 @@ void FileManager::OnUpKeyReleased()
 
 void FileManager::OnDownKeyPressed()
 {
-	//Ignore on INFO screen.
-	if (content.load() == INFO)
+	switch (content.load())
 	{
-		return;
-	}
-
-	if (actualPosition.load() < directoryContent.size()-1)
-	{
-		++actualPosition;
+	case INFO:
+		//Do nothing.
+		break;
+	case VIEW:
+		if (actualPosition.load() < directoryContent.size() - 1)
+		{
+			++actualPosition;
+			wasChange.store(true);
+		}
+		break;
+	case SLEEP:
+		//Wake up.
 		wasChange.store(true);
+		break;
 	}
 }
 void FileManager::OnDownKeyReleased()
@@ -288,7 +310,19 @@ void FileManager::OnDownKeyReleased()
 
 void FileManager::OnPressKeyPressed()
 {
-
+	switch (content.load())
+	{
+	case INFO:
+		//Do nothing.
+		break;
+	case VIEW:
+		//Do nothing.
+		break;
+	case SLEEP:
+		//Wake up.
+		wasChange.store(true);
+		break;
+	}
 }
 void FileManager::OnPressKeyReleased()
 {
@@ -307,12 +341,24 @@ void FileManager::OnKey1Released()
 	wasChange.store(true);
 }
 
-/*
+
 void FileManager::OnKey2Pressed()
 {
-
+	switch (content.load())
+	{
+	case INFO:
+		//Do nothing.
+		break;
+	case VIEW:
+		//Do nothing.
+		break;
+	case SLEEP:
+		//Wake up.
+		wasChange.store(true);
+		break;
+	}
 }
-*/
+
 void FileManager::OnKey2Released()
 {
 
@@ -320,7 +366,19 @@ void FileManager::OnKey2Released()
 
 void FileManager::OnKey3Pressed()
 {
-
+	switch (content.load())
+	{
+	case INFO:
+		//Do nothing.
+		break;
+	case VIEW:
+		//Do nothing.
+		break;
+	case SLEEP:
+		//Wake up.
+		wasChange.store(true);
+		break;
+	}
 }
 void FileManager::OnKey3Released()
 {
@@ -332,6 +390,10 @@ void FileManager::OnExit()
 
 }
 
+void FileManager::OnSleep()
+{
+	content.store(INFO);
+}
 
 void FileManager::operator()()
 {
@@ -364,6 +426,9 @@ void FileManager::operator()()
 					showFileInfo();
 					wasChange.store(false);
 				}
+				break;
+			case SLEEP:
+				//Do nothing.
 				break;
 		}
 		std::this_thread::sleep_for(std::chrono::milliseconds(500));

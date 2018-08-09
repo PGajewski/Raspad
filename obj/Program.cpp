@@ -84,11 +84,12 @@ void Program::OnKey3Released()
 
 void Program::OnExit()
 {
-	//Default "ugly" way to terminate thread.
-	if (!running.load())
-	{
-		std::terminate();
-	}
+
+}
+
+void Program::OnSleep()
+{
+
 }
 
 /*Thread function - virtual*/

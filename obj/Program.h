@@ -47,6 +47,8 @@ public:
 	virtual void OnKey3Pressed();
 	virtual void OnKey3Released();
 
+	virtual void OnSleep();
+
 	virtual void OnExit();
 
 	/*Thread function - pure virtual*/

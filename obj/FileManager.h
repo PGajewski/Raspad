@@ -12,7 +12,7 @@
 namespace fs = std::filesystem;
 
 enum FileManagerContent {
-	VIEW, INFO
+	VIEW, INFO, SLEEP
 };
 
 class FileManager : public Program
@@ -82,6 +82,8 @@ public:
 	void OnKey3Released();
 
 	void OnExit();
+
+	void OnSleep();
 
 	/*Thread function - pure virtual*/
 	void operator()();
