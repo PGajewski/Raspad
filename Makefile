@@ -1,5 +1,5 @@
 DIR_FONTS = ./Fonts
-DIR_OBJ = ./obj
+DIR_OBJ = ./src
 DIR_BIN = ./bin
 
 OBJ_C = $(wildcard ${DIR_FONTS}/*.c ${DIR_OBJ}/*.c)
