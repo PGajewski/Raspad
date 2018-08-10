@@ -75,7 +75,7 @@ public:
 	void OnKey1Pressed();
 	void OnKey1Released();
 
-	//void OnKey2Pressed();
+	void OnKey2Pressed();
 	void OnKey2Released();
 
 	void OnKey3Pressed();

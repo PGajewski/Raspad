@@ -225,31 +225,37 @@ void FileManager::OnRightKeyPressed()
 	switch (content.load())
 	{
 	case INFO:
-		//Do nothing.
-		break;
+		{
+			//Do nothing.
+			break;
+		}
 	case VIEW:
-		//Go to next folder.
-		const std::string temp_file = directoryContent[actualPosition.load()];
-		const std::string temp_file_path = getActualPath() + temp_file;
-		const fs::path path(temp_file_path);
-		std::error_code ec;
-		//Check file is directory.
-		if (fs::is_directory(path, ec))
 		{
-			pathVector.push_back(temp_file);
-			actualPosition.store(0);
-			wasChange.store(true);
-			return;
+			//Go to next folder.
+			const std::string temp_file = directoryContent[actualPosition.load()];
+			const std::string temp_file_path = getActualPath() + temp_file;
+			const fs::path path(temp_file_path);
+			std::error_code ec;
+			//Check file is directory.
+			if (fs::is_directory(path, ec))
+			{
+				pathVector.push_back(temp_file);
+				actualPosition.store(0);
+				wasChange.store(true);
+				return;
+			}
+			if (ec) // Optional handling of possible errors.
+			{
+				std::cerr << "Error in is_directory: " << ec.message();
+			}
+			break;
 		}
-		if (ec) // Optional handling of possible errors.
-		{
-			std::cerr << "Error in is_directory: " << ec.message();
-		}
-		break;
 	case SLEEP:
-		//Wake up.
-		wasChange.store(true);
-		break;
+		{
+			//Wake up.
+			wasChange.store(true);
+			break;
+		}
 	}
 }
 
