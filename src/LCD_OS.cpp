@@ -50,7 +50,7 @@ int LCD_OS::start()
 			if (KeyboardThread::getKeyboardThread().isInactive.load())
 			{
 				isOSUsingScreen.store(true);
-				activeProgram->OnSleep();
+				//activeProgram->OnSleep();
 				LCD_ShowBmp("pic/logo.bmp");
 				continue;
 			}
