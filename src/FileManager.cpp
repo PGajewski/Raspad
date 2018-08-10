@@ -398,7 +398,7 @@ void FileManager::OnExit()
 
 void FileManager::OnSleep()
 {
-	//content.store(SLEEP);
+	content.store(SLEEP);
 }
 
 void FileManager::operator()()
