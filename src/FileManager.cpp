@@ -211,8 +211,8 @@ void FileManager::OnLeftKeyPressed()
 		break;
 	case SLEEP:
 		//Wake up.
-		content.store(VIEW);
 		wasChange.store(true);
+		content.store(VIEW);
 		break;
 	}
 }
@@ -254,8 +254,8 @@ void FileManager::OnRightKeyPressed()
 	case SLEEP:
 		{
 			//Wake up.
-			content.store(VIEW);
-			wasChange.store(true);
+		wasChange.store(true);
+		content.store(VIEW);
 			break;
 		}
 	}
@@ -282,8 +282,8 @@ void FileManager::OnUpKeyPressed()
 		break;
 	case SLEEP:
 		//Wake up.
-		content.store(VIEW);
 		wasChange.store(true);
+		content.store(VIEW);
 		break;
 	}
 }
@@ -308,8 +308,8 @@ void FileManager::OnDownKeyPressed()
 		break;
 	case SLEEP:
 		//Wake up.
-		content.store(VIEW);
 		wasChange.store(true);
+		content.store(VIEW);
 		break;
 	}
 }
@@ -330,8 +330,8 @@ void FileManager::OnPressKeyPressed()
 		break;
 	case SLEEP:
 		//Wake up.
-		content.store(VIEW);
 		wasChange.store(true);
+		content.store(VIEW);
 		break;
 	}
 }
@@ -342,14 +342,14 @@ void FileManager::OnPressKeyReleased()
 
 void FileManager::OnKey1Pressed()
 {
-	content.store(INFO);
 	wasChange.store(true);
+	content.store(INFO);
 
 }
 void FileManager::OnKey1Released()
 {
-	content.store(VIEW);
 	wasChange.store(true);
+	content.store(VIEW);
 }
 
 
@@ -365,8 +365,8 @@ void FileManager::OnKey2Pressed()
 		break;
 	case SLEEP:
 		//Wake up.
-		content.store(VIEW);
 		wasChange.store(true);
+		content.store(VIEW);
 		break;
 	}
 }
@@ -388,8 +388,8 @@ void FileManager::OnKey3Pressed()
 		break;
 	case SLEEP:
 		//Wake up.
-		content.store(VIEW);
 		wasChange.store(true);
+		content.store(VIEW);
 		break;
 	}
 }
