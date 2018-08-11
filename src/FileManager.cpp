@@ -342,9 +342,21 @@ void FileManager::OnPressKeyReleased()
 
 void FileManager::OnKey1Pressed()
 {
-	wasChange.store(true);
-	content.store(INFO);
-
+	switch (content.load())
+	{
+	case INFO:
+		//Do nothing.
+		break;
+	case VIEW:
+		wasChange.store(true);
+		content.store(INFO);
+		break;
+	case SLEEP:
+		//Wake up.
+		wasChange.store(true);
+		content.store(VIEW);
+		break;
+	}
 }
 void FileManager::OnKey1Released()
 {
