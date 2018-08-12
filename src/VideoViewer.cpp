@@ -1,5 +1,27 @@
 #include "VideoViewer.h"
 
+gdi::Bitmap VideoViewer::getBitMap(cv::Mat inputImage)
+{
+	cv::Size size = inputImage.size();
+	gdi::Bitmap bitmap(size.width, size.height, inputImage.step1(), PixelFormat24bppRGB, inputImage.data);
+	return bitmap;
+}
+
+VideoViewer::VideoViewer(std::string path) : Program("VideoViewer", "pic/VideoViewer"), cap(VideoCapture.cap(path))
+{
+	if (!cap.isOpened())
+		std::cerr << "Cannot find file!" << std::endl;
+
+	//Set resolution
+	cap.set(CV_CAP_PROP_FRAME_WIDTH, 128);
+	cap.set(CV_CAP_PROP_FRAME_HEIGHT, 128);
+}
+
+void VideoViewer::getNextFrame()
+{
+	cap >> frame;
+}
+
 void VideoViewer::OnLeftKeyPressed()
 {
 
@@ -87,5 +109,10 @@ void VideoViewer::OnSleep()
 
 void VideoViewer::operator()()
 {
-
+	/*Main loop of program*/
+	while (true)
+	{
+	
+		std::this_thread::sleep_for(std::chrono::milliseconds(500));
+	}
 }

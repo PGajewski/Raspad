@@ -1,14 +1,20 @@
 #pragma once
 #include "Program.h"
 #include "opencv3/opencv.hpp"
+#include <gd.h>
+
 
 
 class VideoViewer : public Program
 {
 private:
-	
+	cv::VideoCapture cap;
+	cv::Mat frame;
+
+	gdi::Bitmap getBitMap(cv::Mat inputImage);
+
 public:
-	VideoViewer() : Program("VideoViewer", "pic/VideoViewer") {}
+	VideoViewer(std::string path);
 
 	/*Functions to handle signals from operational system*/
 	void OnLeftKeyPressed();

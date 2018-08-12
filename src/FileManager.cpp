@@ -360,8 +360,21 @@ void FileManager::OnKey1Pressed()
 }
 void FileManager::OnKey1Released()
 {
-	wasChange.store(true);
-	content.store(VIEW);
+	switch (content.load())
+	{
+	case INFO:
+		wasChange.store(true);
+		content.store(VIEW);
+		break;
+	case VIEW:
+		//Do nothing.
+		break;
+	case SLEEP:
+		//Wake up.
+		wasChange.store(true);
+		content.store(VIEW);
+		break;
+	}
 }
 
 
