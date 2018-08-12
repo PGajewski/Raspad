@@ -1,13 +1,13 @@
 #include "VideoViewer.h"
 
-gdi::Bitmap VideoViewer::getBitMap(cv::Mat inputImage)
+gdiplus::Bitmap VideoViewer::getBitMap(cv::Mat inputImage)
 {
 	cv::Size size = inputImage.size();
 	gdiplus::Bitmap bitmap(size.width, size.height, inputImage.step1(), PixelFormat24bppRGB, inputImage.data);
 	return bitmap;
 }
 
-VideoViewer::VideoViewer(std::string path) : Program("VideoViewer", "pic/VideoViewer"), cap(cv::VideoCapture.cap(path))
+VideoViewer::VideoViewer(std::string path) : Program("VideoViewer", "pic/VideoViewer"), cap(cv::VideoCapture::cap(path))
 {
 	if (!cap.isOpened())
 		std::cerr << "Cannot find file!" << std::endl;

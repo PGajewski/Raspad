@@ -12,8 +12,8 @@ private:
 	cv::VideoCapture cap;
 	cv::Mat frame;
 
-	gdi::Bitmap getBitMap(cv::Mat inputImage);
-
+	gdiplus::Bitmap getBitMap(cv::Mat inputImage);
+	void getNextFrame();
 public:
 	VideoViewer(std::string path);
 
