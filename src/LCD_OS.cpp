@@ -10,8 +10,9 @@ LCD_OS::LCD_OS()
 	keyboardThread = std::thread(std::ref(KeyboardThread::getKeyboardThread()));
 
 	//Init main and active program.
-	mainProgram = std::static_pointer_cast<Program>(std::make_shared<FileManager>());
-	activeProgram = std::static_pointer_cast<Program>(std::make_shared<VideoViewer>("Lindsey_Test.mp4"));
+	mainProgram = std::static_pointer_cast<Program>(std::make_shared<FileManager>("/home/pi"));
+	activeProgram = mainProgram;
+	//activeProgram = std::static_pointer_cast<Program>(std::make_shared<VideoViewer>("Lindsey_Test.mp4"));
 	std::cout << "Constructor finished!" << std::endl;
 }
 
