@@ -11,8 +11,8 @@ LCD_OS::LCD_OS()
 
 	//Init main and active program.
 	mainProgram = std::static_pointer_cast<Program>(std::make_shared<FileManager>("/home/pi"));
-	activeProgram = mainProgram;
-	//activeProgram = std::static_pointer_cast<Program>(std::make_shared<VideoViewer>("Lindsey_Test.mp4"));
+	//activeProgram = mainProgram;
+	activeProgram = std::static_pointer_cast<Program>(std::make_shared<VideoViewer>("Lindsey_Test.mp4"));
 	std::cout << "Constructor finished!" << std::endl;
 }
 
