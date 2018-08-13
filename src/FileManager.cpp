@@ -5,11 +5,7 @@
 FileManager::FileManager(std::string start_path) : Program("FileManager", "pic/FileManager"), startPath(start_path)
 {
 	//Split start path.
-	mySplit<std::vector<std::string>>(startPath, pathVector, '/');
-
-	//Delete empty strings.
-	auto itr = std::find(pathVector.begin(), pathVector.end(), "");
-	if (itr != pathVector.end()) pathVector.erase(itr);
+	this->setPathVector(startPath);
 }
 
 std::string FileManager::getActualPath()
@@ -21,6 +17,17 @@ std::string FileManager::getActualPath()
 		ss << *it << "/";
 	}
 	return ss.str();
+}
+
+void FileManager::setPathVector(std::string start_path)
+{
+	//Restore basic path.
+	pathVector.clear();
+	//Split start path.
+	mySplit<std::vector<std::string>>(start_path, pathVector, '/');
+	//Delete empty strings.
+	auto itr = std::find(pathVector.begin(), pathVector.end(), "");
+	if (itr != pathVector.end()) pathVector.erase(itr);
 }
 
 void FileManager::updateDirectoryContent(const int actualPosition)
@@ -409,13 +416,7 @@ void FileManager::OnKey3Pressed()
 		//Do nothing.
 		break;
 	case VIEW:
-		//Restore basic path.
-		pathVector.clear();
-		//Split start path.
-		mySplit<std::vector<std::string>>(startPath, pathVector, '/');
-		//Delete empty strings.
-		auto itr = std::find(pathVector.begin(), pathVector.end(), "");
-		if (itr != pathVector.end()) pathVector.erase(itr);
+		this->setPathVector(startPath);
 		break;
 	case SLEEP:
 		//Wake up.

@@ -26,6 +26,7 @@ private:
 	void printDirectoryContent(const int actualPosition);
 	void updateActualChosenOption();
 	void showFileInfo();
+	void setPathVector(std::string start_path);
 	std::string getSizeOfFile(const std::string& path) const;
 	std::string getFileDescription(const std::string& path) const;
 	std::string getNumberOfFilesInDirectory(const std::string& path) const;
