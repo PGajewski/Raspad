@@ -73,7 +73,7 @@ uint8_t LCD_ShowBmp(const char *path)
     return 0;
 }
 
-int8_t LCD_ShowBmpFromStream(FILE *fp)
+uint8_t LCD_ShowBmpFromStream(FILE *fp)
 {
 	BMPFILEHEADER bmpFileHeader;  //Define a bmp file header structure
 	BMPINF bmpInfoHeader;         //Define a bmp bitmap header structure 

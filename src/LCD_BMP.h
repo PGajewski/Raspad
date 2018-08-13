@@ -46,6 +46,5 @@ typedef struct RGB_QUAD {
 /**************************************** end ***********************************************/
 
 uint8_t LCD_ShowBmp(const char *path);
-uint8_t LCD_ShowBmpFromStream(FILE* );
-
+uint8_t LCD_ShowBmpFromStream(FILE *fp)
 #endif
