@@ -3,7 +3,7 @@
 
 std::stringstream VideoViewer::getBitMap(cv::Mat inputImage)
 {
-	std:stringstream stream;
+	std::stringstream stream;
 	stream << inputImage;
 	return stream;
 }
