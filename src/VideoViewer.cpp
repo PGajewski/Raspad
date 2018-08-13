@@ -1,13 +1,22 @@
 #include "VideoViewer.h"
+#include "LCD_OS.h"
 
-gdiplus::Bitmap VideoViewer::getBitMap(cv::Mat inputImage)
+std::stringstream VideoViewer::getBitMap(cv::Mat inputImage)
 {
-	cv::Size size = inputImage.size();
-	gdiplus::Bitmap bitmap(size.width, size.height, inputImage.step1(), PixelFormat24bppRGB, inputImage.data);
-	return bitmap;
+	std:sstream stream;
+	stream << mat;
+	return stream;
 }
 
-VideoViewer::VideoViewer(std::string path) : Program("VideoViewer", "pic/VideoViewer"), cap(cv::VideoCapture::cap(path))
+void VideoViewer::showVideoFrame()
+{
+	this->getNextFrame();
+	std::stringstream stream = getBitMap(this->frame);
+	FILE* fp = STDIOAdapter<std::stringstream>::yield(&stream);
+	LCD_OS::getLCDOperationSystem().LCD_ShowBmpFromStream(fp);
+}
+
+VideoViewer::VideoViewer(std::string path) : Program("VideoViewer", "pic/VideoViewer"), cap(cv::VideoCapture(path))
 {
 	if (!cap.isOpened())
 		std::cerr << "Cannot find file!" << std::endl;
@@ -112,7 +121,7 @@ void VideoViewer::operator()()
 	/*Main loop of program*/
 	while (true)
 	{
-	
+		showVideoFrame();
 		std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	}
 }

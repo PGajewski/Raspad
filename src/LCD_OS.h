@@ -125,6 +125,15 @@ public:
 		return 0;
 	}
 
+	inline uint8_t OS_LCD_ShowBmpFromStream(FILE* fp)
+	{
+		if (!isOSUsingScreen.load())
+		{
+			return LCD_ShowBmpFromStream(FILE* fp)
+		}
+		return 0;
+	}
+
 	inline void OS_LCD_Clear(COLOR Color)
 	{
 		if (!isOSUsingScreen.load())

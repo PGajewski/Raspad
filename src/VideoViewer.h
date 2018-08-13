@@ -1,8 +1,9 @@
 #pragma once
 #include "Program.h"
 #include "opencv2/opencv.hpp"
-
-#include <GdiPlusFlat.h>
+#include <iostream>
+#include <sstream>
+#include "STDIOAdapter.h"
 
 
 
@@ -12,7 +13,7 @@ private:
 	cv::VideoCapture cap;
 	cv::Mat frame;
 
-	gdiplus::Bitmap getBitMap(cv::Mat inputImage);
+	std::sstream getBitMap(cv::Mat inputImage);
 	void getNextFrame();
 public:
 	VideoViewer(std::string path);
