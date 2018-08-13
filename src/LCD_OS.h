@@ -129,7 +129,7 @@ public:
 	{
 		if (!isOSUsingScreen.load())
 		{
-			return LCD_ShowBmpFromStream(fp)
+			return LCD_ShowBmpFromStream(fp);
 		}
 		return 0;
 	}

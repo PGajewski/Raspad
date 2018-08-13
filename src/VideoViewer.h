@@ -13,8 +13,10 @@ private:
 	cv::VideoCapture cap;
 	cv::Mat frame;
 
-	std::sstream getBitMap(cv::Mat inputImage);
+	std::stringstream getBitMap(cv::Mat inputImage);
 	void getNextFrame();
+	void showVideoFrame();
+
 public:
 	VideoViewer(std::string path);
 
