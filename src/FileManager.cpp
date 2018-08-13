@@ -417,6 +417,7 @@ void FileManager::OnKey3Pressed()
 		break;
 	case VIEW:
 		this->setPathVector(startPath);
+		wasChange.store(true);
 		break;
 	case SLEEP:
 		//Wake up.
