@@ -3,8 +3,8 @@
 
 std::stringstream VideoViewer::getBitMap(cv::Mat inputImage)
 {
-	std:sstream stream;
-	stream << mat;
+	std:stringstream stream;
+	stream << inputImage;
 	return stream;
 }
 
@@ -13,7 +13,7 @@ void VideoViewer::showVideoFrame()
 	this->getNextFrame();
 	std::stringstream stream = getBitMap(this->frame);
 	FILE* fp = STDIOAdapter<std::stringstream>::yield(&stream);
-	LCD_OS::getLCDOperationSystem().LCD_ShowBmpFromStream(fp);
+	LCD_OS::getLCDOperationSystem().OS_LCD_ShowBmpFromStream(fp);
 }
 
 VideoViewer::VideoViewer(std::string path) : Program("VideoViewer", "pic/VideoViewer"), cap(cv::VideoCapture(path))
