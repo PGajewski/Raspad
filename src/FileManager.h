@@ -18,6 +18,7 @@ enum FileManagerContent {
 class FileManager : public Program
 {
 private:
+	std::string startPath;
 	std::vector<std::string> pathVector;
 	std::vector<std::string> directoryContent;
 	std::string getActualPath();

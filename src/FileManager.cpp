@@ -2,7 +2,7 @@
 #include "LCD_OS.h"
 #include <iostream>
 
-FileManager::FileManager(std::string start_path) : Program("FileManager", "pic/FileManager")
+FileManager::FileManager(std::string start_path) : Program("FileManager", "pic/FileManager"), startPath(start_path)
 {
 	//Split start path.
 	mySplit<std::vector<std::string>>(start_path, pathVector, '/');
@@ -409,7 +409,13 @@ void FileManager::OnKey3Pressed()
 		//Do nothing.
 		break;
 	case VIEW:
-		//Do nothing.
+		//Restore basic path.
+		pathVector.clear();
+		//Split start path.
+		mySplit<std::vector<std::string>>(start_path, pathVector, '/');
+		//Delete empty strings.
+		auto itr = std::find(pathVector.begin(), pathVector.end(), "");
+		if (itr != pathVector.end()) pathVector.erase(itr);
 		break;
 	case SLEEP:
 		//Wake up.
