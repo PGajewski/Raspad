@@ -3,6 +3,7 @@
 
 std::stringstream VideoViewer::getBitMap(cv::Mat inputImage)
 {
+	std::cout << "GetBitMap" << std::endl;
 	std::stringstream stream;
 	stream << inputImage;
 	return stream;
@@ -10,14 +11,18 @@ std::stringstream VideoViewer::getBitMap(cv::Mat inputImage)
 
 void VideoViewer::showVideoFrame()
 {
+	std::cout << "showVideoFrame" << std::endl;
 	this->getNextFrame();
 	std::stringstream stream = getBitMap(this->frame);
+	std::cout << "Project stream to file descriptor" << std::endl;
 	FILE* fp = STDIOAdapter<std::stringstream>::yield(&stream);
+	std::cout << "ShowBitmap" << std::endl;
 	LCD_OS::getLCDOperationSystem().OS_LCD_ShowBmpFromStream(fp);
 }
 
 VideoViewer::VideoViewer(std::string path) : Program("VideoViewer", "pic/VideoViewer"), cap(cv::VideoCapture(path))
 {
+	std::cout << "VideoViewer constructor." << std::endl;
 	if (!cap.isOpened())
 		std::cerr << "Cannot find file!" << std::endl;
 
@@ -28,6 +33,7 @@ VideoViewer::VideoViewer(std::string path) : Program("VideoViewer", "pic/VideoVi
 
 void VideoViewer::getNextFrame()
 {
+	std::cout << "GetNextFrame" << std::endl;
 	cap >> frame;
 }
 
