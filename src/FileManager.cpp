@@ -5,7 +5,7 @@
 FileManager::FileManager(std::string start_path) : Program("FileManager", "pic/FileManager"), startPath(start_path)
 {
 	//Split start path.
-	mySplit<std::vector<std::string>>(start_path, pathVector, '/');
+	mySplit<std::vector<std::string>>(startPath, pathVector, '/');
 
 	//Delete empty strings.
 	auto itr = std::find(pathVector.begin(), pathVector.end(), "");
@@ -412,7 +412,7 @@ void FileManager::OnKey3Pressed()
 		//Restore basic path.
 		pathVector.clear();
 		//Split start path.
-		mySplit<std::vector<std::string>>(start_path, pathVector, '/');
+		mySplit<std::vector<std::string>>(startPath, pathVector, '/');
 		//Delete empty strings.
 		auto itr = std::find(pathVector.begin(), pathVector.end(), "");
 		if (itr != pathVector.end()) pathVector.erase(itr);
