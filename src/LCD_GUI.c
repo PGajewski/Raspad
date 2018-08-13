@@ -350,6 +350,7 @@ void GUI_Disbitmap(POINT Xpoint, POINT Ypoint, const unsigned char *pBmp,
 function:	LCD_Show
 parameter:
 ********************************************************************************/
+/*
 void GUI_Show(void)
 {	
 	LCD_Clear(GUI_BACKGROUND);
@@ -389,5 +390,6 @@ void GUI_Show(void)
 	printf("GUI Display Nummber \r\n");
 	GUI_DisNum(28,55,1234567890,&Font12,GUI_BACKGROUND,BLUE);
 }
+*/
 
 
