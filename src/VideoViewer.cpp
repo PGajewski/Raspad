@@ -20,10 +20,9 @@ void VideoViewer::showVideoFrame()
 	LCD_OS::getLCDOperationSystem().OS_LCD_ShowBmpFromStream(fp);
 }
 
-VideoViewer::VideoViewer(std::string path) : Program("VideoViewer", "pic/VideoViewer")
+VideoViewer::VideoViewer(std::string path) : Program("VideoViewer", "pic/VideoViewer"), cap(std::move(cv::VideoCapture(path)))
 {
 	std::cout << "VideoViewer constructor." << std::endl;
-	cap = cv::VideoCapture(path);
 	if (!cap.isOpened())
 		std::cerr << "Cannot find file!" << std::endl;
 
