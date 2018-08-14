@@ -18,8 +18,8 @@ private:
 	void showVideoFrame();
 
 public:
-	VideoViewer(std::string path);
-
+	VideoViewer(const std::string& path);
+	~VideoViewer();
 	/*Functions to handle signals from operational system*/
 	void OnLeftKeyPressed();
 	void OnLeftKeyReleased();
