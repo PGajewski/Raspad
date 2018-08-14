@@ -22,6 +22,7 @@ void VideoViewer::showVideoFrame()
 
 VideoViewer::VideoViewer(const std::string& path) : Program("VideoViewer", "pic/VideoViewer")
 {
+	cv::VideoCap new_cap(path);
 	std::cout << "VideoViewer constructor." << std::endl;
 	cap.open(path);
 	if (!cap.isOpened())
